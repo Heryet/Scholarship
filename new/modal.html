@@ -1,0 +1,154 @@
+
+<style>
+    .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: -40;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  height: 320px;
+}
+
+/* The Close Button */
+.closes {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.closes:hover,
+.closes:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.days{
+    padding: 20px;
+    background-color: #ddd;
+    border: solid 10px skyblue;
+}
+
+.class-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    column-gap: 1rem;
+    row-gap: 1rem;
+}
+
+.days{
+    padding: 20px;
+    border-radius: 10px;
+    height: 100px;
+    text-align: center;
+}
+.days p{
+    font-family: Bebas Neue;
+    font-size: 20;
+}
+</style>
+
+<button style="filter: opacity(0);" id="myBtn">Open Modal</button>
+
+<!-- The Modal -->
+<div id="myModals" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="closes">&times;</span><br><br>
+    <div style="text-align: center; margin: 10px; font-size: 40px; font-family: bebas neue;">
+        Daily Award
+    </div>
+    <div class="class-container">
+        <div class="days">
+            <div>
+                <img src="stack-no.png" style="width: 100%; border-radius: ;" alt="">
+            </div><br>
+            <div>
+                <p><button style="font-family: Bebas Neue; width: 100%; padding: 7px; border-radius: 20px;">Collect</button></p>
+            </div>
+        </div>
+        
+        <div class="days">
+            <div>
+                <img src="stack.png" style="width: 100%; border-radius: ;" alt="">
+            </div><br>
+            <div>
+                <p><button style="font-family: Bebas Neue; width: 100%; padding: 7px; border-radius: 20px;">Collect</button></p>
+            </div>
+        </div>
+
+        <div class="days">
+            <div>
+                <img src="stack.png" style="width: 100%; border-radius: ;" alt="">
+            </div><br>
+            <div>
+                <p><button style="font-family: Bebas Neue; width: 100%; padding: 7px; border-radius: 20px;">Collect</button></p>
+            </div>
+        </div>
+
+        <div class="days">
+            <div>
+                <img src="stack-done.png" style="width: 100%; border-radius: ;" alt="">
+            </div><br>
+            <div>
+                <p><button style="font-family: Bebas Neue; width: 100%; padding: 7px; border-radius: 20px;">Collect</button></p>
+            </div>
+        </div>
+
+        <div class="days">
+            <div>
+                <img src="stack.png" style="width: 100%; border-radius: ;" alt="">
+            </div><br>
+            <div>
+                <p><button style="font-family: Bebas Neue; width: 100%; padding: 7px; border-radius: 20px;">Collect</button></p>
+            </div>
+        </div>
+    </div>
+  </div><br>
+  
+</div>
+
+<script>
+    // Get the modal
+var modal = document.getElementById("myModals");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("closes")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+modal.style.display = "block";
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
