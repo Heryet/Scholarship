@@ -302,8 +302,8 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Certified Organization</h1>
-    </div><!-- End Page Title -->
+      <h1>Certified Scholarship Programs</h1>
+    </div><!-- End Page Titlessss -->
     
     <div class="containeradd">
     <div class="card">

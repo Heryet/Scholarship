@@ -67,7 +67,11 @@
                                         <p class="text-center small">Enter handler details to create account</p>
                                     </div>
 
+<<<<<<< HEAD
                                     <form class="row g-3 needs-validation" method="POST" action="save-registration-org.php"
+=======
+                                    <form class="row g-3 needs-validation" method="POST" action="save-reg-org.php"
+>>>>>>> 7ea91ea37e1647a8bb4e161436c781e1df4c989d
                                         novalidate>
                                         <div class="col-12">
                                             <label for="yourName" class="form-label">First Name</label>

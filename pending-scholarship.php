@@ -68,7 +68,7 @@
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">NiceAdmin</span>
+        <span class="d-none d-lg-block">DS Scholarship</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -302,7 +302,7 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Pending Scholarship</h1>
+      <h1>Scholarship Status Review</h1>
     </div><!-- End Page Title -->
     
     <div class="containeradd">
@@ -320,7 +320,7 @@
                     <th scope="col">Requirements</th> -->
                     <!-- <th scope="col">Remaining</th> -->
                     <th scope="col">Status</th>
-                    <th scope="col">Option</th>
+                    <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>

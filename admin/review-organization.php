@@ -1,21 +1,12 @@
 <?php
 
-session_start();
+    session_start();
 
-require '../conn.php';
+    if(isset($_SESSION['userID'])){
 
-if(isset($_SESSION['userID'])){
-
-}else{
-    header('location: pages-login.php');
-    
-}
-
-$uid = $_SESSION['userID'];
-
-$getdata = "SELECT * FROM `tbl_userinformation` INNER JOIN tbl_users ON tbl_userinformation.userinfoID = tbl_users.userinfoID WHERE tbl_users.userID = '$uid' ";
-$getdataq = mysqli_query($conn, $getdata);
-$rowdata = mysqli_fetch_array($getdataq);
+    }else{
+        header('location: pages-login.php');
+    }
 
 
 ?>
@@ -233,25 +224,55 @@ $rowdata = mysqli_fetch_array($getdataq);
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-              <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-              <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo ucfirst($rowdata['fname']) ?></span>
-            </a><!-- End Profile Iamge Icon -->
+            <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+          </a><!-- End Profile Iamge Icon -->
 
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-              <li class="dropdown-header">
-                <h6><?php echo ucfirst($rowdata['fname']) ?></h6>
-                <span>Admin</span>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>Kevin Anderson</h6>
+              <span>Web Designer</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
 
-              <li>
-                <a class="dropdown-item d-flex align-items-center" href="../logout.php">
-                  <i class="bi bi-box-arrow-right"></i>
-                  <span>Sign Out</span>
-                </a>
-              </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-gear"></i>
+                <span>Account Settings</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                <i class="bi bi-question-circle"></i>
+                <span>Need Help?</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="../logout.php">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
 
           </ul><!-- End Profile Dropdown Items -->
         </li><!-- End Profile Nav -->
@@ -276,67 +297,88 @@ $rowdata = mysqli_fetch_array($getdataq);
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Review Organization</h1>
+      <h1>Review Request</h1>
       <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Organization</a></li>
-          <li class="breadcrumb-item active">Review Organization</li>
-        </ol>
       </nav>
     </div><!-- End Page Title -->
     
     <div class="containeradd">
     <div class="card">
             <div class="card-body">
-              <h5 class="card-title"></h5>
+              <h5 class="card-title">Review Organization Table</h5>
 
               <!-- Default Table -->
               <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Ogranization</th>
-                    <th scope="col">Company</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Organization Name</th>
+                    <th scope="col">Email</th>
                     <th scope="col">Proofs</th>
-                    <th scope="col">Options</th>
+                    <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                 
                   <?php
 
-                    require '../conn.php';
+  include 'dbcon.php';
 
-                    $checkorg = "SELECT *, tbl_users.userid as 'uid'  FROM `tbl_users` INNER JOIN tbl_organization ON tbl_organization.userID = tbl_users.userID INNER JOIN tbl_proofs ON tbl_proofs.proofsID = tbl_organization.proofsID WHERE tbl_users.userlvlID = '2' AND tbl_users.status = '2'";
-                    $checkorgq = mysqli_query($conn, $checkorg);
-                    while($roworg = mysqli_fetch_array($checkorgq)){
-                  ?>
+  $sql = "SELECT tbl_lesson.lesson_id, tbl_lesson.name, tbl_lesson.objective, tbl_lesson.level, tbl_lesson.type, tbl_lesson.added_by, tbl_lesson_files.lesson_files_id, tbl_lesson_files.lesson, 
+  tbl_lesson_files.status, tbl_userinfo.firstname, tbl_userinfo.middlename, tbl_userinfo.lastname
+  FROM tbl_content
+  JOIN tbl_lesson ON tbl_content.lesson_id = tbl_lesson.lesson_id
+  JOIN tbl_lesson_files ON tbl_content.lesson_files_id = tbl_lesson_files.lesson_files_id
+  JOIN tbl_userinfo ON tbl_lesson.added_by = tbl_userinfo.user_id
+  WHERE tbl_lesson_files.status = 2";
 
-                  <tr>
-                    <th scope="row">1</th>
-                    <td><?php echo ucfirst($roworg['name'])?></td>
-                    <td><?php echo ucfirst($roworg['company'])?></td>
-                    <td>
-                        <?php 
-                    
-                            $files = json_decode($roworg['imageLoc']);
-                            for($i=0; $i<count($files); $i++){
-                                echo "<a href='../uploads/".$files[$i]."' target='_blank'>".$files[$i]."</a><br>";
-                            }
-                    
-                        ?>
-                    
-                    </td>
-                    <td>
-  <a href="approve-org.php?userid=<?php echo $roworg['uid'] ?>" class="btn btn-success">Approve</a>
-  <a href="decline-org.php" class="btn btn-danger">Decline</a>
-</td>
+  $result = mysqli_query($conn, $sql);
 
-                    
-                  <?php
-                    }
-                  ?>
+  if (!$result) {
+      die("Error executing the query: " . mysqli_error($conn));
+  }
 
+  if ($result && mysqli_num_rows($result) > 0) {
+      while ($row = mysqli_fetch_assoc($result)) {
+          ?>
+                                  <tr>
+          <td>
+              <div class="form-check form-checkbox-success">
+                  <input type="checkbox" class="form-check-input customCheckbox" id="customCheckcolor2">
+                  <label class="form-check-label" for="customCheckcolor2"></label>
+              </div>
+          </td>
+          <td><?php echo $row['lesson_id']; ?></td>
+          <td><?php echo $row['name']; ?></td>
+          <td><?php echo $row['objective']; ?></td>
+          <td><?php echo $row['type']; ?></td>
+          <td><a href="teachers/lessons/<?php echo $row['lesson']; ?>" target="_blank"><?php echo substr($row['lesson'], 0, 15); ?></a></td>
+          <td><?php echo $row['firstname'] . ' ' . $row['middlename'] . ' ' . $row['lastname']; ?></td>
+          <td>
+          <a href="admin_lesson_accept.php?lesson_files_id=<?php echo $row['lesson_files_id'] ?>" class="accept">
+              <button type="button" class="btn btn-primary"><i class="uil-check"></i></button>
+          </a>
+          <a href="admin_lesson_decline.php?lesson=<?php echo $row['lesson'] ?>" class="decline">
+              <button type="button" class="btn btn-danger"><i class="mdi mdi-window-close"></i></button>
+          </a>
+          </td>
+          <td>
+              <?php
+              if ($row['status'] == 2) {
+                  echo '<span class="badge bg-warning">Pending</span>';
+              } else {
+                  echo "<tr><td colspan='6'>No records found</td></tr>";
+              }
+              ?>
+          </td>
+      </tr>
+      <?php
+      }
+  } else {
+      echo "<tr><td colspan='6'>No records found</td></tr>";
+  }
+  ?>
+  </td>
                 </tbody>
               </table>
               <!-- End Default Table Example -->

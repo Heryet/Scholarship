@@ -19,7 +19,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Admin</title>
+  <title>Organization</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -174,7 +174,7 @@
     <div class="d-flex align-items-center justify-content-between">
       <a href="landingpage.php" class="logo d-flex align-items-center">
         <img src="../assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">NiceAdmin</span>
+        <span class="d-none d-lg-block">DS Scholarship</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -506,11 +506,11 @@ $checkorgq = mysqli_query($conn, $checkorg);
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">Userid</th>
+                <th scope="col">Student Number</th>
                 <th scope="col">Name</th>
                 <th scope="col">Gender</th>
                 <th scope="col">Email</th>
-                <th scope="col">Option</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
