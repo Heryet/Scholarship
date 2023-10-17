@@ -45,13 +45,6 @@
     </ul>
   </li><!-- End Components Nav -->
 
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="#">
-      <i class="bi bi-file-earmark"></i>
-      <span>Reports</span>
-    </a>
-  </li>
-  <!-- End Reports Nav -->
 </ul>
 
 </aside><!-- End Sidebar-->

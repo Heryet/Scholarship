@@ -1,12 +1,21 @@
 <?php
 
-    session_start();
+session_start();
 
-    if(isset($_SESSION['userID'])){
+require '../conn.php';
 
-    }else{
-        header('location: pages-login.php');
-    }
+if(isset($_SESSION['userID'])){
+
+}else{
+    header('location: pages-login.php');
+    
+}
+
+$uid = $_SESSION['userID'];
+
+$getdata = "SELECT * FROM `tbl_userinformation` INNER JOIN tbl_users ON tbl_userinformation.userinfoID = tbl_users.userinfoID WHERE tbl_users.userID = '$uid' ";
+$getdataq = mysqli_query($conn, $getdata);
+$rowdata = mysqli_fetch_array($getdataq);
 
 
 ?>
@@ -18,7 +27,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Admin</title>
+  <title>Super Admin</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -59,7 +68,7 @@
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="../assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">NiceAdmin</span>
+        <span class="d-none d-lg-block">DS Scholarship</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -225,43 +234,13 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo ucfirst($rowdata['fname']) ?></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
+              <h6><?php echo ucfirst($rowdata['fname']) ?></h6>
+              <span>Admin</span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -289,7 +268,7 @@
     if($_SESSION['userlvlID'] == "3"){
         include('../include/sidebar.php');
     }else if($_SESSION['userlvlID'] == "1"){
-        include('../include/sidebar-admin.php');
+        include('../include/sidebar-superadmin.php');
     }
   
   ?>
@@ -297,72 +276,78 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Review Organization</h1>
+      <h1>Dashboard</h1>
       <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
       </nav>
     </div><!-- End Page Title -->
-    
-    <div class="containeradd">
-    <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Review Table</h5>
 
-              <!-- Default Table -->
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Organization Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Proofs</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                
-                  <?php
+    <!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 20px;
+      margin-bottom: 20px;
+    }
 
-                    require '../conn.php';
+    .dashboard-card {
+      background-color: #f5f5f5;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+    }
 
-                    $checkorg = "SELECT *, tbl_users.userid as 'uid'  FROM `tbl_users` INNER JOIN tbl_organization ON tbl_organization.userID = tbl_users.userID INNER JOIN tbl_proofs ON tbl_proofs.proofsID = tbl_organization.proofsID WHERE tbl_users.userlvlID = '2' AND tbl_users.status = '2'";
-                    $checkorgq = mysqli_query($conn, $checkorg);
-                    while($roworg = mysqli_fetch_array($checkorgq)){
-                  ?>
+    .dashboard-card h3 {
+      margin-top: 0;
+      font-size: 20px;
+      font-weight: bold;
+    }
 
-                  <tr>
-                    <th scope="row">1</th>
-                    <td><?php echo ucfirst($roworg['name'])?></td>
-                    <td><?php echo ucfirst($roworg['company'])?></td>
-                    <td>
-                        <?php 
-                    
-                            $files = json_decode($roworg['imageLoc']);
-                            for($i=0; $i<count($files); $i++){
-                                echo "<a href='../uploads/".$files[$i]."' target='_blank'>".$files[$i]."</a><br>";
-                            }
-                    
-                        ?>
-                    
-                    </td>
-                    <td>
-                        <a href="approve-org.php?userid=<?php echo $roworg['uid'] ?>">Approve</a> <a href="decline-org.php">Decline</a>
-                    </td>
-                  </tr>
-                    
-                  <?php
-                    }
-                  ?>
-
-                </tbody>
-              </table>
-              <!-- End Default Table Example -->
-            </div>
-          </div>
+    .dashboard-card p {
+      margin: 0;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <div class="dashboard-card">
+      <h3>Registered Organization Accounts</h3>
+      <p>5</p>
     </div>
+    <div class="dashboard-card">
+      <h3>Registered Student Accounts</h3>
+      <p>10</p>
+    </div>
+    <div class="dashboard-card">
+      <h3>Active Accounts</h3>
+      <p>20</p>
+    </div>
+    <div class="dashboard-card">
+      <h3>Inactive Accounts</h3>
+      <p>15</p>
+    </div>
+    <div class="dashboard-card">
+      <h3>Total User Accounts</h3>
+      <p>30</p>
+    </div>
+  </div>
+</body>
+</html>
+
 
   </main><!-- End #main -->
 
+      
+
   <!-- ======= Footer ======= -->
+  
   <footer id="footer" class="footer">
     <div class="copyright">
       <!-- &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved -->

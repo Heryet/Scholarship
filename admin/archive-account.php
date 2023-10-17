@@ -1,12 +1,21 @@
 <?php
 
-    session_start();
+session_start();
 
-    if(isset($_SESSION['userID'])){
+require '../conn.php';
 
-    }else{
-        header('location: pages-login.php');
-    }
+if(isset($_SESSION['userID'])){
+
+}else{
+    header('location: pages-login.php');
+    
+}
+
+$uid = $_SESSION['userID'];
+
+$getdata = "SELECT * FROM `tbl_userinformation` INNER JOIN tbl_users ON tbl_userinformation.userinfoID = tbl_users.userinfoID WHERE tbl_users.userID = '$uid' ";
+$getdataq = mysqli_query($conn, $getdata);
+$rowdata = mysqli_fetch_array($getdataq);
 
 
 ?>
@@ -18,9 +27,123 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Admin</title>
+  <title>Super Admin</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
+
+  <style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ 
+/* Assigning all the same properties to the body */
+    .container{
+        width: 20em;
+        background-color: rgb(255, 255, 255);
+        overflow: hidden;
+        border-radius: 1em;
+        text-align: center;
+        font-family: 'Open Sans Condensed', sans-serif;
+        font-size: 1em;
+    }
+    
+    .user-image{
+        padding: 3em 0;
+        background-image: linear-gradient(70deg,#61A1DD,#0083FD);
+        box-shadow:  0 0.6em 1em pink;
+    }
+    
+    .user-image img{
+        width: 7em;
+        height: 7em;
+        border-radius: 50%;
+        box-shadow:  0 0.6em 1.8em pink;
+        object-fit: cover;
+    }
+    
+    .content{
+        color: #565656;
+        padding: 2.2em;
+    }
+    
+    .name{
+        font-size: 1em;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+    
+    .username{
+        font-size: 1em;
+        color: #9e9e9e;
+    }
+    
+    .links{
+        display: flex;
+        justify-content: center;
+        margin: 1.5em 0;
+    }
+    
+    .user-image a{
+        text-decoration: none;
+        color: #565656;
+        transition: all 0.3s;
+        font-size: 2em;
+        margin-right: 1.2em;
+    }
+    
+    .user-image a:last-child{
+        margin: 0;
+    }
+    
+    .insta:hover{
+        color:rgb(255, 70, 101);
+        transform: scale(2,2);
+    }
+    
+    .git:hover{
+        color:rgb(0, 0, 0);
+        transform: scale(2,2);
+    }
+    
+    .linkedin:hover{
+        color:rgba(4, 0, 253, 0.842);
+        transform: scale(2,2);
+    }
+    
+    .facebook:hover{
+        color:rgb(4, 0, 255);
+        transform: scale(2,2);
+    }
+    
+    .details{
+        margin-bottom: 1.8em;
+    }
+    
+    
+    /* CSS for messagin link */
+    
+    .effect {
+        text-align: center;
+        display: inline-block;
+        position: relative;
+        text-decoration: none;
+        color: rgb(48, 41, 41);
+        text-transform: capitalize;
+        width: 100%;
+        background-image: linear-gradient(60deg,#0083FD,#61A1DD);
+        font-size: 1.2em;
+        padding: 1em 3em;
+        border-radius: 5em;
+        overflow: hidden;
+        transition: 0.5s;
+    }
+    .effect:hover{
+      color: white;
+    }
+
+  </style>
 
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
@@ -59,7 +182,7 @@
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="../assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">NiceAdmin</span>
+        <span class="d-none d-lg-block">DS Scholarship</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -224,55 +347,25 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
-          </a><!-- End Profile Iamge Icon -->
+                <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo ucfirst($rowdata['fname']) ?></span>
+              </a><!-- End Profile Iamge Icon -->
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                <li class="dropdown-header">
+                  <h6><?php echo ucfirst($rowdata['fname']) ?></h6>
+                  <span>Super Admin</span>
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="../logout.php">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </a>
-            </li>
+                <li>
+                  <a class="dropdown-item d-flex align-items-center" href="../logout.php">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>Sign Out</span>
+                  </a>
+                </li>
 
           </ul><!-- End Profile Dropdown Items -->
         </li><!-- End Profile Nav -->
@@ -286,79 +379,192 @@
     
   <?php 
 
-    if($_SESSION['userlvlID'] == "3"){
-        include('../include/sidebar.php');
-    }else if($_SESSION['userlvlID'] == "1"){
-        include('../include/sidebar-admin.php');
-    }
+    include('../include/sidebar-superadmin.php');
   
   ?>
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Review Organization</h1>
+      <h1>Archive Account</h1>
       <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Archiving Account</a></li>
+          <li class="breadcrumb-item active">User Account List</li>
+        </ol>
       </nav>
     </div><!-- End Page Title -->
+
+    
     
     <div class="containeradd">
-    <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Review Table</h5>
 
-              <!-- Default Table -->
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Organization Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Proofs</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+
+          <!-- Default Table -->
+          <table class="table">
+          <div class="col-sm-3">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="filterDropdown">Filter by:</label>
+                                </div>
+                                <select class="form-control" id="filterDropdown">
+                                    <option value="0,1,2,3">-Acitivity-</option>
+                                    <option value="0">Inactive Account</option>
+                                    <option value="1">Active Account</option>
+                                </select>
+                            </div>
+                        </div>
+            <thead>
+              <tr>
+                <th scope="col">User ID</th>
+                <th scope="col">Username</th>   
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              <style>
+                .modals{
+                  z-index: 2;
+                  background-color: rgba(0, 0, 0, 0.2);
+                  position: fixed;
+                  width: 100%;
+                  height: 100%;
+                  top: 0;
+                  left: 0;
+                  overflow: scroll;
+                  display: none;
+                }
+
+                .modalcontent{
+                  /* margin: auto 15%; */
+                  /* z-index: 3; */
+                  background-color: white;
+                  width: 50%;
+                  margin: 8% 35%;
+                  height: auto;
+                  padding: 20px;
+                  border-radius: 10px;
+                  scroll-behavior: smooth;
+                  
+                }
+
+                .close{
+                  color: white;
+                  font-weight: 900;
+                  font-size: 10px;
+                  background-color: red;
+                  padding: 3px;
+                  float: right;
+                  border-radius:5px;
+                  cursor: pointer;
+                  /* box-shadow: 1px 1px 1px 1px #888; */
+                }
+              </style>
+            
+              <?php
+
+                require '../conn.php';
+
+                $uid = $_SESSION['userID'];
+
+                $checkorg = "SELECT *, tbl_scholarship.status AS 'stat'  FROM `tbl_scholarship` INNER JOIN tbl_organization ON tbl_scholarship.orgID = tbl_organization.orgID INNER JOIN tbl_stype ON tbl_stype.stype_id = tbl_scholarship.stype_id";
+                $checkorgq = mysqli_query($conn, $checkorg);
+
+                $count = 0;
+
+                $archived = "";
+                $link = "";
+                $color = "";
+
+                while($roworg = mysqli_fetch_array($checkorgq)){
+
+                  $sid = $roworg['scholarshipID'];
+
+                  $countsc = "SELECT COUNT(*) FROM `tbl_scholars` WHERE tbl_scholars.scholarshipID = '$sid' ";
+                  $countscq = mysqli_query($conn, $countsc);
+                  $countscrow = mysqli_fetch_array($countscq);
+
+                  ++$count;
+
+
+                  if($roworg['stat'] == '2'){
+                    $archived = "Unarchive";
+                    $color = "green";
+                    $link = "2";
+                  }else{
+                    $archived = "Archive";
+                    $color = "#888";
+                    $link = "1";
+                  }
+
+              ?>
+
+
+             
+
+              <tr>
+                <th scope="row"><?php echo $count ?></th>
+                <td><?php echo ucfirst($roworg['scholarshipname'])?></td>
+                <td>
+  <a href="approve-org.php?" class="btn btn-success">Notify</a>
+  <a href="decline-org.php" class="btn btn-danger">Archive</a>
+</td>
+                <!-- <td><?php echo ucfirst($roworg['name'])?></td> -->
+                <!-- <td><?php echo ucfirst($roworg['req'])?></td> -->
+                <!-- <td><?php echo ucfirst($roworg['applicant_limit'] - $countscrow['COUNT(*)'] ."/". ucfirst($roworg['applicant_limit']))?></td>
+                <td><a href="?sid=<?php echo $sid?>">Applicants</a></td> -->
+              </tr>
+
+
+              <script>
+
+                  let modals<?php echo $sid?> = document.getElementById('modals<?php echo $sid?>');
+                  let close<?php echo $sid?> = document.getElementById('close<?php echo $sid?>');
+                  
+                  function openmodal(){
+                    modals<?php echo $sid?>.style.display = 'block';
+                  }
+
+                  close<?php echo $sid?>.onclick = function(){
+                    modals<?php echo $sid?>.style.display = 'none';
+                  }
+
+
+              </script>
                 
-                  <?php
+              <?php
+                }
+              ?>
 
-                    require '../conn.php';
+            </tbody>
+          </table>
+          <!-- End Default Table Example -->
+          
+        </div>
+      </div>
 
-                    $checkorg = "SELECT *, tbl_users.userid as 'uid'  FROM `tbl_users` INNER JOIN tbl_organization ON tbl_organization.userID = tbl_users.userID INNER JOIN tbl_proofs ON tbl_proofs.proofsID = tbl_organization.proofsID WHERE tbl_users.userlvlID = '2' AND tbl_users.status = '2'";
-                    $checkorgq = mysqli_query($conn, $checkorg);
-                    while($roworg = mysqli_fetch_array($checkorgq)){
-                  ?>
+       
+          </table>
+          <!-- End Default Table Example -->
+          
+        </div>
+      </div>
 
-                  <tr>
-                    <th scope="row">1</th>
-                    <td><?php echo ucfirst($roworg['name'])?></td>
-                    <td><?php echo ucfirst($roworg['company'])?></td>
-                    <td>
-                        <?php 
-                    
-                            $files = json_decode($roworg['imageLoc']);
-                            for($i=0; $i<count($files); $i++){
-                                echo "<a href='../uploads/".$files[$i]."' target='_blank'>".$files[$i]."</a><br>";
-                            }
-                    
-                        ?>
-                    
-                    </td>
-                    <td>
-                        <a href="approve-org.php?userid=<?php echo $roworg['uid'] ?>">Approve</a> <a href="decline-org.php">Decline</a>
-                    </td>
-                  </tr>
-                    
-                  <?php
-                    }
-                  ?>
+   
+           
+          </table>
+          <!-- End Default Table Example -->
+          
+        </div>
+      </div>
 
-                </tbody>
-              </table>
-              <!-- End Default Table Example -->
-            </div>
-          </div>
     </div>
+
+          </table>
 
   </main><!-- End #main -->
 
