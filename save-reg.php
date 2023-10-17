@@ -35,7 +35,7 @@
             echo "<script>alert('Username already exist'); history.go(-1); </script>";
         }else{
             $insertdata = "INSERT INTO `tbl_userinformation` (`userinfoID`, `fname`, `mname`, `lname`, `birthdate`, `gender`, `email`,`contact`,`address`, `username`, `password`, `status`) VALUES ('$userid', '$fname', '$mname', '$lname', '$bd', '$gender', '$email','$contact','$address', '$username', '$password', '1')";
-            $insertdata2 = "INSERT INTO `tbl_users` (`userID`, `userinfoID`, `userlvlID`, `status`) VALUES ('$userid2', '$userid', '$userlvl', '1')";
+            $insertdata2 = "INSERT INTO `tbl_users` (`userID`, `userinfoID`, `userlvlID`, `status`) VALUES ('$userid2', '$userid', '3', '1')";
 
             if(mysqli_query($conn, $insertdata)){
                 if(mysqli_query($conn, $insertdata2)){
