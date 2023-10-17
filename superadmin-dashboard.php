@@ -1,21 +1,12 @@
 <?php
 
-session_start();
+    session_start();
 
-require 'conn.php';
+    if(isset($_SESSION['userID'])){
 
-if(isset($_SESSION['userID'])){
-
-}else{
-    header('location: pages-login.php');
-    
-}
-
-$uid = $_SESSION['userID'];
-
-$getdata = "SELECT * FROM `tbl_userinformation` INNER JOIN tbl_users ON tbl_userinformation.userinfoID = tbl_users.userinfoID WHERE tbl_users.userID = '$uid' ";
-$getdataq = mysqli_query($conn, $getdata);
-$rowdata = mysqli_fetch_array($getdataq);
+    }else{
+        header('location: pages-login.php');
+    }
 
 
 ?>
@@ -24,35 +15,10 @@ $rowdata = mysqli_fetch_array($getdataq);
 <html lang="en">
 
 <head>
-
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Scholarship',     3],
-          ['Accepted Applicants',      2],
-          ['Available Slots',  90],
-        ]);
-
-        var options = {
-          title: 'Organization Chart'
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-        chart.draw(data, options);
-      }
-    </script>
-
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Organization</title>
+  <title>Admin</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -91,14 +57,19 @@ $rowdata = mysqli_fetch_array($getdataq);
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.php" class="logo d-flex align-items-center">
+      <a href="index.html" class="logo d-flex align-items-center">
         <img src="../assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">DS Scholarship</span>
+        <span class="d-none d-lg-block">NiceAdmin</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
-
+    <div class="search-bar">
+      <form class="search-form d-flex align-items-center" method="POST" action="#">
+        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+      </form>
+    </div><!-- End Search Bar -->
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
@@ -254,20 +225,20 @@ $rowdata = mysqli_fetch_array($getdataq);
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo ucfirst($rowdata['fname']) ?></span>
+            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6><?php echo ucfirst($rowdata['fname']) ?></h6>
-              <span>Organization</span>
+              <h6>Kevin Anderson</h6>
+              <span>Web Designer</span>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="organization/users-profile.php">
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -277,7 +248,7 @@ $rowdata = mysqli_fetch_array($getdataq);
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.php">
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                 <i class="bi bi-gear"></i>
                 <span>Account Settings</span>
               </a>
@@ -315,18 +286,80 @@ $rowdata = mysqli_fetch_array($getdataq);
     
   <?php 
 
-      include('../include/sidebar-org.php');
+    if($_SESSION['userlvlID'] == "3"){
+        include('../include/sidebar.php');
+    }else if($_SESSION['userlvlID'] == "1"){
+        include('../include/sidebar-admin.php');
+    }
   
   ?>
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Dashboard</h1>
+      <h1>Review Organization</h1>
+      <nav>
+      </nav>
     </div><!-- End Page Title -->
     
+    <div class="containeradd">
+    <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Review Table</h5>
 
-    <div id="piechart" style="width: 1080px; height: 720px;"></div>
+              <!-- Default Table -->
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Organization Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Proofs</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                
+                  <?php
+
+                    require '../conn.php';
+
+                    $checkorg = "SELECT *, tbl_users.userid as 'uid'  FROM `tbl_users` INNER JOIN tbl_organization ON tbl_organization.userID = tbl_users.userID INNER JOIN tbl_proofs ON tbl_proofs.proofsID = tbl_organization.proofsID WHERE tbl_users.userlvlID = '2' AND tbl_users.status = '2'";
+                    $checkorgq = mysqli_query($conn, $checkorg);
+                    while($roworg = mysqli_fetch_array($checkorgq)){
+                  ?>
+
+                  <tr>
+                    <th scope="row">1</th>
+                    <td><?php echo ucfirst($roworg['name'])?></td>
+                    <td><?php echo ucfirst($roworg['company'])?></td>
+                    <td>
+                        <?php 
+                    
+                            $files = json_decode($roworg['imageLoc']);
+                            for($i=0; $i<count($files); $i++){
+                                echo "<a href='../uploads/".$files[$i]."' target='_blank'>".$files[$i]."</a><br>";
+                            }
+                    
+                        ?>
+                    
+                    </td>
+                    <td>
+                        <a href="approve-org.php?userid=<?php echo $roworg['uid'] ?>">Approve</a> <a href="decline-org.php">Decline</a>
+                    </td>
+                  </tr>
+                    
+                  <?php
+                    }
+                  ?>
+
+                </tbody>
+              </table>
+              <!-- End Default Table Example -->
+            </div>
+          </div>
+    </div>
+
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->

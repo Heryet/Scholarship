@@ -21,7 +21,7 @@
       </li>
       <li>
         <a href="pending-scholarship.php">
-          <i class="bi bi-circle"></i><span>Pending Scholarship</span>
+          <i class="bi bi-circle"></i><span>Review Status</span>
         </a>
       </li>
       <li>

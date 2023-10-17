@@ -1,5 +1,5 @@
 <?php
 
-    $conn = mysqli_connect("localhost", "root", "", "scholarDB");
+    $conn = mysqli_connect("localhost", "root", "", "scholardboct");
 
 ?>

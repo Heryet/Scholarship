@@ -182,7 +182,7 @@ $rowdata = mysqli_fetch_array($getdataq);
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="../assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">NiceAdmin</span>
+        <span class="d-none d-lg-block">DS Scholarship</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -734,7 +734,7 @@ $rowdata = mysqli_fetch_array($getdataq);
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">Userid</th>
+                <th scope="col">Student Number</th>
                 <th scope="col">Name</th>
                 <th scope="col">Gender</th>
                 <th scope="col">Email</th>
