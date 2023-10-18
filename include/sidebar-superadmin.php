@@ -3,7 +3,7 @@
 <ul class="sidebar-nav" id="sidebar-nav">
 
   <li class="nav-item">
-    <a class="nav-link " href="index.php">
+    <a class="nav-link " href="super_admin.php">
       <i class="bi bi-grid"></i>
       <span>Dashboard</span>
     </a>
@@ -26,26 +26,7 @@
       </li>
     </ul>
   </li> -->
-  
-  <!-- End Components Nav -->
 
-  <li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#components-nav1" data-bs-toggle="collapse" href="#">
-      <i class="bi bi-menu-button-wide"></i><span>Organization</span><i class="bi bi-chevron-down ms-auto"></i>
-    </a>
-    <ul id="components-nav1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-      <li>
-        <a href="review-organization.php">
-          <i class="bi bi-circle"></i><span>Review Organization</span>
-        </a>
-      </li>
-      <li>
-        <a href="list-organization.php">
-          <i class="bi bi-circle"></i><span>Organization List</span>
-        </a>
-      </li>
-    </ul>
-  </li><!-- End Components Nav -->
 
  <!-- End Components Nav -->
 
@@ -56,7 +37,13 @@
     <ul id="components-nav3" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
         <a href="archived-scholar.php">
-          <i class="bi bi-circle"></i><span>List of Scholars</span>
+          <i class="bi bi-circle"></i><span>Student Users</span>
+        </a>
+      </li>
+      <li>
+      <li>
+        <a href="archived-org.php">
+          <i class="bi bi-circle"></i><span>Organization Users</span>
         </a>
       </li>
       <li>
@@ -77,19 +64,6 @@
   
   <!-- End Blank Page Nav -->
 
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="https://www.facebook.com/ErikaHerriet/">
-      <i class="bi bi-file-earmark"></i>
-      <span>Erika Xdd</span>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="pages-blank.html">
-      <i class="bi bi-file-earmark"></i>
-      <span>Gelline Xdd</span>
-    </a>
-  </li>
-  
   <!-- End Blank Page Nav -->
 <!-- 
 

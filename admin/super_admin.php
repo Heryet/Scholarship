@@ -240,7 +240,7 @@ $rowdata = mysqli_fetch_array($getdataq);
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6><?php echo ucfirst($rowdata['fname']) ?></h6>
-              <span>Admin</span>
+              <span>SuperAdmin</span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -279,7 +279,7 @@ $rowdata = mysqli_fetch_array($getdataq);
       <h1>Dashboard</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="super_admin.php">Home</a></li>
           <li class="breadcrumb-item active">Dashboard</li>
         </ol>
       </nav>
