@@ -1,21 +1,12 @@
 <?php
 
-session_start();
+    session_start();
 
-require '../conn.php';
+    if(isset($_SESSION['userID'])){
 
-if(isset($_SESSION['userID'])){
-
-}else{
-    header('location: pages-login.php');
-    
-}
-
-$uid = $_SESSION['userID'];
-
-$getdata = "SELECT * FROM `tbl_userinformation` INNER JOIN tbl_users ON tbl_userinformation.userinfoID = tbl_users.userinfoID WHERE tbl_users.userID = '$uid' ";
-$getdataq = mysqli_query($conn, $getdata);
-$rowdata = mysqli_fetch_array($getdataq);
+    }else{
+        header('location: pages-login.php');
+    }
 
 
 ?>
@@ -233,25 +224,55 @@ $rowdata = mysqli_fetch_array($getdataq);
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-              <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-              <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo ucfirst($rowdata['fname']) ?></span>
-            </a><!-- End Profile Iamge Icon -->
+            <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+          </a><!-- End Profile Iamge Icon -->
 
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-              <li class="dropdown-header">
-                <h6><?php echo ucfirst($rowdata['fname']) ?></h6>
-                <span>Admin</span>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>Kevin Anderson</h6>
+              <span>Web Designer</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
 
-              <li>
-                <a class="dropdown-item d-flex align-items-center" href="../logout.php">
-                  <i class="bi bi-box-arrow-right"></i>
-                  <span>Sign Out</span>
-                </a>
-              </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-gear"></i>
+                <span>Account Settings</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                <i class="bi bi-question-circle"></i>
+                <span>Need Help?</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="../logout.php">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
 
           </ul><!-- End Profile Dropdown Items -->
         </li><!-- End Profile Nav -->
@@ -278,27 +299,23 @@ $rowdata = mysqli_fetch_array($getdataq);
     <div class="pagetitle">
       <h1>Review Organization</h1>
       <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Organization</a></li>
-          <li class="breadcrumb-item active">Review Organization</li>
-        </ol>
       </nav>
     </div><!-- End Page Title -->
     
     <div class="containeradd">
     <div class="card">
             <div class="card-body">
-              <h5 class="card-title"></h5>
+              <h5 class="card-title">Review Table</h5>
 
               <!-- Default Table -->
               <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Ogranization</th>
-                    <th scope="col">Company</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Organization Name</th>
+                    <th scope="col">Email</th>
                     <th scope="col">Proofs</th>
-                    <th scope="col">Options</th>
+                    <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -328,10 +345,9 @@ $rowdata = mysqli_fetch_array($getdataq);
                     
                     </td>
                     <td>
-  <a href="approve-org.php?userid=<?php echo $roworg['uid'] ?>" class="btn btn-success">Approve</a>
-  <a href="decline-org.php" class="btn btn-danger">Decline</a>
-</td>
-
+                        <a href="approve-org.php?userid=<?php echo $roworg['uid'] ?>">Approve</a> <a href="decline-org.php">Decline</a>
+                    </td>
+                  </tr>
                     
                   <?php
                     }

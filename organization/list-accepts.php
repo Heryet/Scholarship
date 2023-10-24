@@ -1,5 +1,6 @@
 <?php
-
+    
+    require '../conn.php';
     session_start();
 
     if(isset($_SESSION['userID'])){
@@ -8,6 +9,11 @@
         header('location: pages-login.php');
     }
 
+    $uid = $_SESSION['userID'];
+
+    $getdata = "SELECT * FROM `tbl_userinformation` INNER JOIN tbl_users ON tbl_userinformation.userinfoID = tbl_users.userinfoID WHERE tbl_users.userID = '$uid' ";
+    $getdataq = mysqli_query($conn, $getdata);
+    $rowdata = mysqli_fetch_array($getdataq);  
     
 
 ?>
@@ -338,15 +344,15 @@
 
         <li class="nav-item dropdown pe-3">
 
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo ucfirst($rowdata['fname']) ?></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
+          <li class="dropdown-header">
+              <h6><?php echo ucfirst($rowdata['fname']) ?></h6>
+              <span>Organization</span>
             </li>
             <li>
               <hr class="dropdown-divider">

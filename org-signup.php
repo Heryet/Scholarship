@@ -66,7 +66,7 @@
                                         <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
                                         <p class="text-center small">Enter handler details to create account</p>
                                     </div>
-na okay na hahahahaha pero wait lang okay na jud nicee send sa gc ninyo ang bag'o ayy wait ako nalang hahaha lihopg ko send sa gc sige2x
+
                                     <form class="row g-3 needs-validation" method="POST" action="save-registration-org.php"
                                         novalidate>
                                         <div class="col-12">

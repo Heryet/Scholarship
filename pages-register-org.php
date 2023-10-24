@@ -64,7 +64,7 @@
                     <!-- <p class="text-center small">Enter your personal details to create account</p> -->
                   </div>
 
-                  <form class="row g-3 needs-validation" method="POST" action="save-registration-org.php" enctype='multipart/form-data' novalidate>
+                  <form class="row g-3 needs-validation" method="POST" action="save-reg-org.php" enctype='multipart/form-data' novalidate>
                     <div class="col-12">
                       <label for="yourName" class="form-label">Ogranization Name</label>
                       <input type="text" name="oname" class="form-control" id="yourName" required>
