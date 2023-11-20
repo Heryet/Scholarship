@@ -1,4 +1,9 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+?>
+
+<?php
 
 session_start();
 
@@ -26,7 +31,7 @@ $rowdata = mysqli_fetch_array($getdataq);
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title><?php echo ucfirst($rowdata['fname']) ?></title>
+  <title><?php echo ucfirst($rowdata['fname']) ?> - Users Profile</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -65,9 +70,9 @@ $rowdata = mysqli_fetch_array($getdataq);
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="index.php" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">NiceAdmin</span>
+        <span class="d-none d-lg-block">DS Scholarship</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -165,10 +170,10 @@ $rowdata = mysqli_fetch_array($getdataq);
 
         <li class="nav-item dropdown">
 
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
+          <!--<a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">-->
+          <!--  <i class="bi bi-chat-left-text"></i>-->
+          <!--  <span class="badge bg-success badge-number">3</span>-->
+          <!--</a><!-- End Messages Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
             <li class="dropdown-header">
@@ -264,17 +269,7 @@ $rowdata = mysqli_fetch_array($getdataq);
             <li>
               <hr class="dropdown-divider">
             </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
+            
             <li>
             <a class="dropdown-item d-flex align-items-center" href="logout.php">
                 <i class="bi bi-box-arrow-right"></i>
@@ -508,12 +503,24 @@ $rowdata = mysqli_fetch_array($getdataq);
                 </li>
 
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Settings</button>
-                </li>
-
-                <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
                 </li>
+                
+                <div id="passwordChangeSuccess" style="display: none;">
+                    Password updated successfully.
+                </div>
+                
+                <script>
+                    // Check if the success query parameter is present
+                    const urlParams = new URLSearchParams(window.location.search);
+                    if (urlParams.has('success')) {
+                        // Show the success message
+                        const successMessage = document.getElementById('passwordChangeSuccess');
+                        if (successMessage) {
+                            successMessage.style.display = 'block';
+                        }
+                    }
+                </script>
 
               </ul>
               <div class="tab-content pt-2">
@@ -587,10 +594,10 @@ $rowdata = mysqli_fetch_array($getdataq);
             </div>
             <div class="modal-body">
                 <!-- Add your file upload form or input here -->
-                <form action="upload-profile-student.php" method="post" enctype="multipart/form-data">
+                <form action="upload-profile-image.php" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="fileInput" class="form-label">Choose a file:</label>
-                        <input type="file" class="form-control" id="fileInput" name="fileToUpload">
+                        <input type="file" class="form-control" id="fileInput" name="profpic">
                     </div>
                     <button type="submit" class="btn btn-primary">Upload</button>
                 </form>
@@ -606,60 +613,12 @@ $rowdata = mysqli_fetch_array($getdataq);
 
 
 
+
                           <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
                         </div>
                       </div>
                     </div>
 
-                    <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">First Name</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="fullName" type="text" class="form-control" id="fullName" value=<?php echo ucfirst($rowdata['fname']) ?>>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Middle Name</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="fullName" type="text" class="form-control" id="fullName" value=<?php echo ucfirst($rowdata['mname']) ?>>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Surname Name</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="fullName" type="text" class="form-control" id="fullName" value=<?php echo ucfirst($rowdata['lname']) ?>>
-                      </div>
-                    </div>
-
-                    <!--
-                    <div class="row mb-3">
-                      <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
-                      <div class="col-md-8 col-lg-9">
-                        <textarea name="about" class="form-control" id="about" style="height: 100px">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</textarea>
-                      </div>
-                    </div> -->
-
-                    <div class="row mb-3">
-                      <label for="company" class="col-md-4 col-lg-3 col-form-label">Birthdate</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="company" type="text" class="form-control" id="company" value=<?php echo ucfirst($rowdata['birthdate']) ?>>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Job" class="col-md-4 col-lg-3 col-form-label">Gender</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="job" type="text" class="form-control" id="Job" value=<?php echo ucfirst($rowdata['gender']) ?>>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Country" class="col-md-4 col-lg-3 col-form-label">Email</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="country" type="text" class="form-control" id="Country" value=<?php echo($rowdata['email']) ?>>
-                      </div>
-                    </div>
 
                     <div class="row mb-3">
                       <label for="Job" class="col-md-4 col-lg-3 col-form-label">Contact Number</label>
@@ -691,79 +650,40 @@ $rowdata = mysqli_fetch_array($getdataq);
 
                 </div>
 
-                <div class="tab-pane fade pt-3" id="profile-settings">
-
-                  <!-- Settings Form -->
-                  <form>
-
-                    <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email Notifications</label>
-                      <div class="col-md-8 col-lg-9">
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="changesMade" checked>
-                          <label class="form-check-label" for="changesMade">
-                            Changes made to your account
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="newProducts" checked>
-                          <label class="form-check-label" for="newProducts">
-                            Information on new products and services
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="proOffers">
-                          <label class="form-check-label" for="proOffers">
-                            Marketing and promo offers
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="securityNotify" checked disabled>
-                          <label class="form-check-label" for="securityNotify">
-                            Security alerts
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </div>
-                  </form><!-- End settings Form -->
-
-                </div>
-
+                <!-- Add this code within the tab-content div for "Change Password" -->
                 <div class="tab-pane fade pt-3" id="profile-change-password">
-                  <!-- Change Password Form -->
-                  <form>
+                    <form method="post" action="change-password.php">
+                        <div class="row mb-3">
+                            <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+                            <div class="col-md-8 col-lg-9">
+                                <input name="currentPassword" type="password" class="form-control" id="currentPassword" required>
+                            </div>
+                        </div>
 
-                    <div class="row mb-3">
-                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control" id="currentPassword">
-                      </div>
-                    </div>
+                        
+                        <div class="row mb-3">
+                            <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                            <div class="col-md-8 col-lg-9">
+                                <input name="newPassword" type="password" class="form-control" id="newPassword" pattern="^(?=.*[A-Z]).{8,}$" title="Must be at least 8 characters long and contain at least 1 capital letter" required>
+                                <div class="invalid-feedback">Password must be at least 8 characters long and contain at least 1 capital letter.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+                            <div class="col-md-8 col-lg-9">
+                                <input name="renewPassword" type="password" class="form-control" id="renewPassword">
+                                <div class="invalid-feedback">Passwords do not match.</div>
+                            </div>
+                        </div>
 
-                    <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="newpassword" type="password" class="form-control" id="newPassword">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="renewpassword" type="password" class="form-control" id="renewPassword">
-                      </div>
-                    </div>
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Change Password</button>
-                    </div>
-                  </form><!-- End Change Password Form -->
-
+                
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Change Password</button>
+                        </div>
+                    </form>
                 </div>
+
 
               </div><!-- End Bordered Tabs -->
 
@@ -779,7 +699,7 @@ $rowdata = mysqli_fetch_array($getdataq);
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>DS Scholarship</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
       <!-- All the links in the footer should remain intact. -->

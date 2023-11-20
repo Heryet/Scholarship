@@ -7,7 +7,7 @@ require 'conn.php';
 if(isset($_SESSION['userID'])){
 
 }else{
-    header('location: pages-login.php');
+    header('location: landingpage.php');
     
 }
 
@@ -74,12 +74,7 @@ $rowdata = mysqli_fetch_array($getdataq);
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
-    <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div><!-- End Search Bar -->
+<!-- End Search Bar -->
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
@@ -167,10 +162,10 @@ $rowdata = mysqli_fetch_array($getdataq);
 
         <li class="nav-item dropdown">
 
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
+          <!--<a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">-->
+          <!--  <i class="bi bi-chat-left-text"></i>-->
+          <!--  <span class="badge bg-success badge-number">3</span>-->
+          <!--</a><!-- End Messages Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
             <li class="dropdown-header">
@@ -267,15 +262,13 @@ $rowdata = mysqli_fetch_array($getdataq);
               <hr class="dropdown-divider">
             </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+            <!--<li>-->
+            <!--  <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">-->
+            <!--    <i class="bi bi-question-circle"></i>-->
+            <!--    <span>Need Help?</span>-->
+            <!--  </a>-->
+            <!--</li>-->
+
 
             <li>
               <a class="dropdown-item d-flex align-items-center" href="logout.php">
@@ -304,49 +297,96 @@ $rowdata = mysqli_fetch_array($getdataq);
   
   ?>
 
-  <main id="main" class="main">
+ <main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+        <li class="breadcrumb-item active">Dashboard</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
 
-    <div class="pagetitle">
-      <h1>Dashboard</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
-
-    <div class="modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1Label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="portfolioModal1Label">Modal Title 1</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Add your scrollable content here -->
-                <img class="img-fluid" src="assets/img/ched.png" alt="..." />
-                <!-- Add more content if needed -->
-            </div>
-            <div class="modal-footer">
-                <!-- Add the href attribute to the "Apply Now" button -->
-                <a href="pages-login.php" class="btn btn-success">Apply Now</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-                    <!-- Portfolio Item 2-->
-                    <div class="col-md-6 col-lg-4 mb-5">
-                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
-                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                            </div>
-                            <img class="img-fluid" src="assets/img/edukar.png" alt="..." />
-                        </div>
+  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-label="Slide 1" aria-current="true"></button>
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2" class=""></button>
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3" class=""></button>
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4" class=""></button>
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5" class=""></button>
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5" aria-label="Slide 6" class=""></button>
+                  
+                </div>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="assets/img/edukar.png" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>First slide label</h5>
+                      <p>Some representative placeholder content for the first slide.</p>
                     </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="assets/img/ched.png" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Second slide label</h5>
+                      <p>Some representative placeholder content for the second slide.</p>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="assets/img/DOS.png" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Third slide label</h5>
+                      <p>Some representative placeholder content for the third slide.</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="carousel-item">
+                  <img src="assets/img/TES.png" class="d-block w-100" alt="...">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>Fourth slide label</h5>
+                    <p>Some content for the fourth slide.</p>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <img src="assets/img/TESDA.png" class="d-block w-100" alt="...">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>Fifth slide label</h5>
+                    <p>Some content for the fifth slide.</p>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <img src="assets/img/Unifast.png" class="d-block w-100" alt="...">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>Sixth slide label</h5>
+                    <p>Some content for the sixth slide.</p>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <img src="assets/img/owwa.png" class="d-block w-100" alt="...">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>Sixth slide label</h5>
+                    <p>Some content for the sixth slide.</p>
+                  </div>
+                </div>
+              </div>
 
-  </main><!-- End #main -->
+                <!-- Correct button order -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+
+
+              </div>
+
+</main><!-- End #main -->
+
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">

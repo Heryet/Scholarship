@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Freelancer - Start Bootstrap Theme</title>
+        <title>DS Scholarship Portal</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
@@ -76,69 +76,81 @@
                 </div>
                 <!-- Portfolio Grid Items-->
                 <div class="row justify-content-center">
+                    
                     <!-- Portfolio Item 1-->
                     <div class="col-md-6 col-lg-4 mb-5">
-    <div class="portfolio-item mx-auto">
-        <a href="#" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
-            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-            </div>
-            <img class="img-fluid" src="assets/img/ched.png" alt="..." />
-        </a>
-    </div>
-</div>
+                      <div class="portfolio-item mx-auto">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
+                          <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                            <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                          </div>
+                          <img class="img-fluid" src="assets/img/ched.png" alt="..." class="portfolio-item-img">
+                        </a>
+                      </div>
+                    </div>
+                    
+                    <style>
+                      /* CSS class to set a fixed height for the image container */
+                      .portfolio-item img {
+                        height: 200px; /* Adjust the height as needed */
+                        object-fit: cover; /* Maintain the aspect ratio and cover the container */
+                      }
+                    </style>
 
-<!-- Modal 1 -->
-<div class="modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1Label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="portfolioModal1Label">Modal Title 1</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Add your scrollable content here -->
-                <img class="img-fluid" src="assets/img/ched.png" alt="..." />
-                <!-- Add more content if needed -->
-            </div>
-            <div class="modal-footer">
-                <!-- Add the href attribute to the "Apply Now" button -->
-                <a href="pages-login.php" class="btn btn-success">Apply Now</a>
-            </div>
-        </div>
-    </div>
-</div>
 
-                    <!-- Portfolio Item 2-->
-                    <div class="col-md-6 col-lg-4 mb-5">
-                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
-                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                    <!-- Modal 1 -->
+                    <div class="modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1Label" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="portfolioModal1Label">CHED Scholarship Program</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Add your scrollable content here -->
+                                    <img class="img-fluid" src="assets/img/ched.png" alt="..." />
+                                    <!-- Add more content if needed -->
+                                </div>
+                                <div class="modal-footer">
+                                    <!-- Add the href attribute to the "Apply Now" button -->
+                                    <a href="pages-login.php" class="btn btn-success">Apply Now</a>
+                                </div>
                             </div>
-                            <img class="img-fluid" src="assets/img/edukar.png" alt="..." />
                         </div>
                     </div>
 
+                    <!-- Portfolio Item 2-->
+                    <div class="col-md-6 col-lg-4 mb-5">
+                      <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
+                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                          <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                        </div>
+                        <img class="img-fluid" src="assets/img/edukar.png" alt="..." class="portfolio-item-img">
+                      </div>
+                    </div>
+
                     <!-- Modal 2 -->
-<div class="modal fade" id="portfolioModal2" tabindex="-1" aria-labelledby="portfolioModal1Label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="portfolioModal1Label">Modal Title 1</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Add your scrollable content here -->
-                <img class="img-fluid" src="assets/img/edukar.png" alt="..." />
-                <!-- Add more content if needed -->
-            </div>
-            <div class="modal-footer">
-                <!-- Add the href attribute to the "Apply Now" button -->
-                <a href="pages-login.php" class="btn btn-success">Apply Now</a>
-            </div>
-        </div>
-    </div>
-</div>
+                    <div class="modal fade" id="portfolioModal2" tabindex="-1" aria-labelledby="portfolioModal1Label" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="portfolioModal1Label">EduKAR Scholarship Program</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Add your scrollable content here -->
+                                    <img class="img-fluid" src="assets/img/edukar.png" alt="..." />
+                                    <!-- Add more content if needed -->
+                                </div>
+                                <div class="modal-footer">
+                                    <!-- Add the href attribute to the "Apply Now" button -->
+                                    <a href="pages-login.php" class="btn btn-success">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
                     <!-- Portfolio Item 3-->
                     <div class="col-md-6 col-lg-4 mb-5">
                         <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal3">
@@ -150,94 +162,122 @@
                     </div>
 
                     <!-- Modal 3 -->
-<div class="modal fade" id="portfolioModal3" tabindex="-1" aria-labelledby="portfolioModal1Label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="portfolioModal1Label">Modal Title 1</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Add your scrollable content here -->
-                <img class="img-fluid" src="assets/img/owwa.png" alt="..." />
-                <!-- Add more content if needed -->
-            </div>
-            <div class="modal-footer">
-                <!-- Add the href attribute to the "Apply Now" button -->
-                <a href="pages-login.php" class="btn btn-success">Apply Now</a>
-            </div>
-        </div>
-    </div>
-</div>
+                    <div class="modal fade" id="portfolioModal3" tabindex="-1" aria-labelledby="portfolioModal1Label" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="portfolioModal1Label">OWWA Scholarship Program</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Add your scrollable content here -->
+                                    <img class="img-fluid" src="assets/img/owwa.png" alt="..." />
+                                    <!-- Add more content if needed -->
+                                </div>
+                                <div class="modal-footer">
+                                    <!-- Add the href attribute to the "Apply Now" button -->
+                                    <a href="pages-login.php" class="btn btn-success">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
                     <!-- Portfolio Item 4-->
                     <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
                         <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal4">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/tesda.png" alt="..." />
+                            <img class="img-fluid" src="assets/img/TESDA.png" alt="..." />
                         </div>
                     </div>
 
                     <!-- Modal 4 -->
-<div class="modal fade" id="portfolioModal4" tabindex="-1" aria-labelledby="portfolioModal1Label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="portfolioModal1Label">Modal Title 1</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Add your scrollable content here -->
-                <img class="img-fluid" src="assets/img/tesda.png" alt="..." />
-                <!-- Add more content if needed -->
-            </div>
-            <div class="modal-footer">
-                <!-- Add the href attribute to the "Apply Now" button -->
-                <a href="pages-login.php" class="btn btn-success">Apply Now</a>
-            </div>
-        </div>
-    </div>
-</div>
+                    <div class="modal fade" id="portfolioModal4" tabindex="-1" aria-labelledby="portfolioModal1Label" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="portfolioModal1Label">TESDA Scholarship Program</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Add your scrollable content here -->
+                                    <img class="img-fluid" src="assets/img/TESDA.png" alt="..." />
+                                    <!-- Add more content if needed -->
+                                </div>
+                                <div class="modal-footer">
+                                    <!-- Add the href attribute to the "Apply Now" button -->
+                                    <a href="pages-login.php" class="btn btn-success">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
                     <!-- Portfolio Item 5-->
                     <div class="col-md-6 col-lg-4 mb-5 mb-md-0">
                         <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal5">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/unifast.png" alt="..." />
+                            <img class="img-fluid" src="assets/img/Unifast.png" alt="..." />
                         </div>
                     </div>
 
                     <!-- Modal 5 -->
-<div class="modal fade" id="portfolioModal5" tabindex="-1" aria-labelledby="portfolioModal1Label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="portfolioModal1Label">Modal Title 1</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Add your scrollable content here -->
-                <img class="img-fluid" src="assets/img/unifast.png" alt="..." />
-                <!-- Add more content if needed -->
-            </div>
-            <div class="modal-footer">
-                <!-- Add the href attribute to the "Apply Now" button -->
-                <a href="pages-login.php" class="btn btn-success">Apply Now</a>
-            </div>
-        </div>
-    </div>
-</div>
-                    <!-- Portfolio Item 6-->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal6">
-                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                    <div class="modal fade" id="portfolioModal5" tabindex="-1" aria-labelledby="portfolioModal1Label" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="portfolioModal1Label">UNIFAST Scholarship Program</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Add your scrollable content here -->
+                                    <img class="img-fluid" src="assets/img/Unifast.png" alt="..." />
+                                    <!-- Add more content if needed -->
+                                </div>
+                                <div class="modal-footer">
+                                    <!-- Add the href attribute to the "Apply Now" button -->
+                                    <a href="pages-login.php" class="btn btn-success">Apply Now</a>
+                                </div>
                             </div>
-                            <img class="img-fluid" src="assets/img/submarine.png" alt="..." />
                         </div>
                     </div>
+                    
+                    
+                    <!-- Portfolio Item 6 -->
+                    <div class="col-md-6 col-lg-4">
+                      <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal6">
+                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                          <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                        </div>
+                        <img class="img-fluid" src="assets/img/DOS.png" alt="..." />
+                      </div>
+                    </div>
+                    
+                    <!-- Modal 6 -->
+                    <div class="modal fade" id="portfolioModal6" tabindex="-1" aria-labelledby="portfolioModal6Label" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="portfolioModal6Label">DOST S&T Scholarship Program</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <!-- Add your scrollable content here -->
+                            <img class="img-fluid" src="assets/img/DOS.png" alt="..." />
+                            <!-- Add more content if needed -->
+                          </div>
+                          <div class="modal-footer">
+                            <!-- Add the href attribute to the "Apply Now" button -->
+                            <a href="pages-login.php" class="btn btn-success">Apply Now</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                 </div>
             </div>
         </section>

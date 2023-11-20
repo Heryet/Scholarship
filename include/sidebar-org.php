@@ -10,7 +10,7 @@
   </li><!-- End Dashboard Nav -->
 
   <li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+    <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="javascript:void(0);">
       <i class="bi bi-menu-button-wide"></i><span>Scholarship</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
     <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -30,7 +30,8 @@
         </a>
       </li>
     </ul>
-  </li>
+</li>
+
   
   <!-- End Components Nav -->
 
@@ -64,7 +65,7 @@
   <!-- End Blank Page Nav -->
 
   <li class="nav-item">
-    <a class="nav-link collapsed" href="#">
+    <a class="nav-link collapsed" href="reports.php">
       <i class="bi bi-file-earmark"></i>
       <span>Reports</span>
     </a> 

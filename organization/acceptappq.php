@@ -7,7 +7,7 @@
 
     
 
-    $updatescholar = "UPDATE tbl_scholars SET status = '2' WHERE scholarsID = '$ssid'  ";
+    $updatescholar = "UPDATE tbl_scholars SET status = '3' WHERE scholarsID = '$ssid'  ";
     echo $sid;
 
     if(mysqli_query($conn, $updatescholar)){

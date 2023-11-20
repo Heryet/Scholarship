@@ -63,203 +63,10 @@ $rowdata = mysqli_fetch_array($getdataq);
 <body>
 
   <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
-
-    <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
-        <img src="../assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">DS Scholarship</span>
-      </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
-    </div><!-- End Logo -->
-
-    <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div><!-- End Search Bar -->
-
-    <nav class="header-nav ms-auto">
-      <ul class="d-flex align-items-center">
-
-        <li class="nav-item d-block d-lg-none">
-          <a class="nav-link nav-icon search-bar-toggle " href="#">
-            <i class="bi bi-search"></i>
-          </a>
-        </li><!-- End Search Icon-->
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">4</span>
-          </a><!-- End Notification Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              You have 4 new notifications
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-exclamation-circle text-warning"></i>
-              <div>
-                <h4>Lorem Ipsum</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>30 min. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-x-circle text-danger"></i>
-              <div>
-                <h4>Atque rerum nesciunt</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>1 hr. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-check-circle text-success"></i>
-              <div>
-                <h4>Sit rerum fuga</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>2 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <div>
-                <h4>Dicta reprehenderit</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>4 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li class="dropdown-footer">
-              <a href="#">Show all notifications</a>
-            </li>
-
-          </ul><!-- End Notification Dropdown Items -->
-
-        </li><!-- End Notification Nav -->
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <li class="dropdown-header">
-              You have 3 new messages
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="../assets/img/messages-1.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Maria Hudson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>4 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="../assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Anna Nelson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>6 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>David Muldon</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>8 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="dropdown-footer">
-              <a href="#">Show all messages</a>
-            </li>
-
-          </ul><!-- End Messages Dropdown Items -->
-
-        </li><!-- End Messages Nav -->
-
-        <li class="nav-item dropdown pe-3">
-
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo ucfirst($rowdata['fname']) ?></span>
-          </a><!-- End Profile Iamge Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li class="dropdown-header">
-              <h6><?php echo ucfirst($rowdata['fname']) ?></h6>
-              <span>Admin</span>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="../logout.php">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </a>
-            </li>
-
-          </ul><!-- End Profile Dropdown Items -->
-        </li><!-- End Profile Nav -->
-
-      </ul>
-    </nav><!-- End Icons Navigation -->
-
-  </header><!-- End Header -->
+  
+  <?php include('../include/header-admin.php')?>
+  
+  <!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
     
@@ -317,28 +124,83 @@ $rowdata = mysqli_fetch_array($getdataq);
 </head>
 <body>
   <div class="dashboard">
+    <?php
+    require '../conn.php';
+
+    // Query to count registered organizations
+    $registeredOrganizationsCountQuery = "SELECT COUNT(*) AS orgCount FROM tbl_users WHERE status = 3";
+    $registeredOrganizationsCountResult = mysqli_query($conn, $registeredOrganizationsCountQuery);
+    $registeredOrganizationsCountRow = mysqli_fetch_assoc($registeredOrganizationsCountResult);
+    $registeredOrganizations1 = $registeredOrganizationsCountRow['orgCount'];
+    
+    // Query to count pending organizations
+    $orgCountQuery = "SELECT COUNT(*) AS orgCount FROM tbl_users WHERE status = 2";
+    $orgCountResult = mysqli_query($conn, $orgCountQuery);
+    $orgCountRow = mysqli_fetch_assoc($orgCountResult);
+    $registeredOrganizations = $orgCountRow['orgCount'];
+
+    // Query to count active scholarship programs
+    $activeScholarshipQuery = "SELECT COUNT(*) AS activeScholarships FROM tbl_scholarship WHERE status = 1";
+    $activeScholarshipResult = mysqli_query($conn, $activeScholarshipQuery);
+    $activeScholarshipRow = mysqli_fetch_assoc($activeScholarshipResult);
+    $activeScholarships = $activeScholarshipRow['activeScholarships'];
+
+    // Query to count total scholars
+    $totalScholarsQuery = "SELECT COUNT(*) AS totalScholars FROM tbl_scholars WHERE status = 3";
+    $totalScholarsResult = mysqli_query($conn, $totalScholarsQuery);
+    $totalScholarsRow = mysqli_fetch_assoc($totalScholarsResult);
+    $totalScholars = $totalScholarsRow['totalScholars'];
+
+    // Query to count pending applicants
+    $pendingApplicantsQuery = "SELECT COUNT(*) AS pendingApplicants FROM tbl_scholars WHERE status = 1";
+    $pendingApplicantsResult = mysqli_query($conn, $pendingApplicantsQuery);
+    $pendingApplicantsRow = mysqli_fetch_assoc($pendingApplicantsResult);
+    $pendingApplicants = $pendingApplicantsRow['pendingApplicants'];
+
+    // Query to count rejected applicants
+    $rejectedApplicantsQuery = "SELECT COUNT(*) AS rejectedApplicants FROM tbl_scholars WHERE status = 0";
+    $rejectedApplicantsResult = mysqli_query($conn, $rejectedApplicantsQuery);
+    $rejectedApplicantsRow = mysqli_fetch_assoc($rejectedApplicantsResult);
+    $rejectedApplicants = $rejectedApplicantsRow['rejectedApplicants'];
+    
+    // Query to count total users
+    $totalUserQuery = "SELECT COUNT(*) AS totalUser FROM tbl_users WHERE (status = 1 OR status = 2) AND (userlvlID = 2 OR userlvlID = 3);";
+    $totalUserResult = mysqli_query($conn, $totalUserQuery);
+    $totalUserRow = mysqli_fetch_assoc($totalUserResult);
+    $totalUser = $totalUserRow['totalUser'];
+    ?>
+    
     <div class="dashboard-card">
       <h3>Registered Organizations</h3>
-      <p>25</p>
+      <p><?php echo $registeredOrganizations1; ?></p>
+    </div>
+    <div class="dashboard-card">
+      <h3>Pending Organizations</h3>
+      <p><?php echo $registeredOrganizations; ?></p>
     </div>
     <div class="dashboard-card">
       <h3>Active Scholarship Programs</h3>
-      <p>10</p>
+      <p><?php echo $activeScholarships; ?></p>
     </div>
     <div class="dashboard-card">
       <h3>Total Scholars</h3>
-      <p>50</p>
+      <p><?php echo $totalScholars; ?></p>
     </div>
     <div class="dashboard-card">
       <h3>Total Pending Applicants</h3>
-      <p>15</p>
+      <p><?php echo $pendingApplicants; ?></p>
     </div>
     <div class="dashboard-card">
       <h3>Rejected Applicants</h3>
-      <p>5</p>
+      <p><?php echo $rejectedApplicants; ?></p>
+    </div>
+    <div class="dashboard-card">
+      <h3>Total Accounts Registered</h3>
+      <p><?php echo $totalUser; ?></p>
     </div>
   </div>
 </body>
+
 </html>
 
 

@@ -1,0 +1,43 @@
+1. Filtering 
+	STUDENT:
+		list-scholarship.php
+			Scholarship Type (merit,skills,etc)
+			Year Level (College/Sr/Junior)
+			Filter whether whose organization name it is.
+
+	Organization:
+		ogrganizaiton/list-scholarship.php
+			Year Level
+			Recent Applied students(accend or decend)
+			
+2. Notification
+	STUDENT:
+		Student will be notified regarding with the status of the application(accepted, rejected, or upon review)
+		Student will be notified if the organization wants the student to reupload a specific document
+
+	ORGANIZATION:
+		Org will recieve a notification per transaction if some student applied on their scholarship
+		Org while reviewing the student; Org could send a message that would go directly to students notification 
+		what to reupload)
+
+3. Registration form
+	ORGANIZATION:
+		org-signup.php
+			remove files upload from org-signup.php
+			get the data "Organization Name" from org-signup.php reflect it to pages-register-org.php.
+			Email verification for organization is needed.
+
+4. Adding Scholarship
+	ORGANIZATION:
+		add-scholarship.php
+			add deadline
+
+5. Management
+	ORGANIZATION:
+		CRUD to list of students (VIEW, REMOVE, ACCEPT) 
+	ADMIN:
+		CRUD to list of Scholarship and List of students from specific scholarship (VIEW, ARCHIVE)
+
+6. Reports
+	ORGANIZATION:
+		List of Scholars (VIEW and PRINT)

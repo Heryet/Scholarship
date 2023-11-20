@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Pages / Register</title>
+    <title>Organization Sign-up</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -99,7 +99,7 @@
 
                                         <div class="col-12">
                                             <label for="yourName" class="form-label">Organization Name</label>
-                                            <input type="text" name="lname" class="form-control" id="yourName" required>
+                                            <input type="text" name="orgname" class="form-control" id="yourName" required>
                                             <div class="invalid-feedback">Please, enter name!</div>
                                         </div>
 
@@ -121,18 +121,74 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <label for="yourPassword" class="form-label">Password</label>
-                                            <input type="password" name="password" class="form-control"
-                                                id="yourPassword" required>
-                                            <div class="invalid-feedback">Please enter your password!</div>
+                                          <label for="yourPassword" class="form-label">Password</label>
+                                          <input type="password" name="password" class="form-control" id="yourPassword" required>
+                                          <div class="invalid-feedback">Please enter a valid password (at least 8 characters with 1 capital letter).</div>
                                         </div>
-
-
+                    
+                                        
+                                        <script>
+                                          const passwordInput = document.getElementById('yourPassword');
+                                        
+                                          passwordInput.addEventListener('input', validatePassword);
+                                        
+                                          function validatePassword() {
+                                            const password = passwordInput.value;
+                                            const feedback = document.querySelector('#yourPassword + .invalid-feedback');
+                                        
+                                            // Check if the password meets the criteria
+                                            const hasMinimumLength = password.length >= 8;
+                                            const hasCapitalLetter = /[A-Z]/.test(password);
+                                        
+                                            if (hasMinimumLength && hasCapitalLetter) {
+                                              // Password meets the criteria, remove the invalid feedback
+                                              feedback.textContent = '';
+                                              passwordInput.setCustomValidity('');
+                                            } else {
+                                              // Password does not meet the criteria, show an error message
+                                              feedback.textContent = "Password must be at least 8 characters with 1 capital letter.";
+                                              passwordInput.setCustomValidity('Password requirements not met');
+                                            }
+                                          }
+                                        </script>
+                                        
                                         <div class="col-12">
-                                            <label for="attachment" class="form-label">Attachment</label>
-                                            <input type="file" name="attachment" class="form-control" id="attachment">
-                                            <div class="form-text">Upload your attachment (Required).</div>
+                                          <label for="reenterPassword" class="form-label">Re-enter Password</label>
+                                          <input type="password" name="reenterPassword" class="form-control" id="reenterPassword" required>
+                                          <div class="invalid-feedback">Please re-enter your password.</div>
                                         </div>
+                                        
+                                        <script>
+                                          // Get references to the password and re-enter password input elements
+                                          const passwordInput = document.getElementById('yourPassword');
+                                          const reenterPasswordInput = document.getElementById('reenterPassword');
+                                        
+                                          // Add an event listener to the re-enter password input for real-time validation
+                                          reenterPasswordInput.addEventListener('input', validatePassword);
+                                        
+                                          function validatePassword() {
+                                            const password = passwordInput.value;
+                                            const reenterPassword = reenterPasswordInput.value;
+                                            const feedback = document.querySelector('#reenterPassword + .invalid-feedback');
+                                        
+                                            if (password === reenterPassword) {
+                                              // Passwords match, remove the invalid feedback
+                                              feedback.textContent = '';
+                                              reenterPasswordInput.setCustomValidity('');
+                                            } else {
+                                              // Passwords don't match, show an error message
+                                              feedback.textContent = "Passwords do not match!";
+                                              reenterPasswordInput.setCustomValidity('Passwords do not match');
+                                            }
+                                          }
+                                        </script>
+
+
+                                        <!--<div class="col-12">-->
+                                        <!--    <label for="attachment" class="form-label">Attachment</label>-->
+                                        <!--    <input type="file" name="attachment" class="form-control" id="attachment">-->
+                                        <!--    <div class="form-text">Upload your supporting documents (Required).</div>-->
+                                        <!--</div>-->
 
 
 

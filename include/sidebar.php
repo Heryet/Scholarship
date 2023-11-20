@@ -25,7 +25,7 @@
         </a>
       </li>
       <li>
-        <a href="pending-scholarship.php">
+        <a href="my-scholarship.php">
           <i class="bi bi-circle"></i><span>My Scholarship</span>
         </a>
       </li>

@@ -25,9 +25,10 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Organization</title>
+  <title>List of Accepted Scholars</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
+  <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
     *{
@@ -178,7 +179,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="index.php" class="logo d-flex align-items-center">
         <img src="../assets/img/logo.png" alt="">
         <span class="d-none d-lg-block">DS Scholarship</span>
       </a>
@@ -278,10 +279,7 @@
 
         <li class="nav-item dropdown">
 
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
+<!-- End Messages Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
             <li class="dropdown-header">
@@ -359,7 +357,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.php">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -377,17 +375,7 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
+            
             <li>
               <a class="dropdown-item d-flex align-items-center" href="../logout.php">
                 <i class="bi bi-box-arrow-right"></i>
@@ -429,8 +417,9 @@
                         <th scope="col">#</th>
                         <th scope="col">Scholarship</th>
                         <th scope="col">Description</th>
+                        <th scope="col">Program Level</th>
                         <!-- <th scope="col">Requirements</th> -->
-                        <th scope="col">Remaining</th>
+                        <th scope="col">Scholar/s</th>
                         <th scope="col">Option</th>
                     </tr>
                 </thead>
@@ -444,13 +433,17 @@
 
                     $count = 0;
 
-                    $checkorg = "SELECT * FROM `tbl_scholarship` INNER JOIN tbl_organization ON tbl_scholarship.orgID = tbl_organization.orgID WHERE tbl_organization.userID = '$uid'";
+                    $checkorg = "SELECT * FROM `tbl_scholarship` 
+                                 INNER JOIN tbl_organization ON tbl_scholarship.orgID = tbl_organization.orgID 
+                                 INNER JOIN tbl_programlvl ON tbl_scholarship.proglvlid = tbl_programlvl.programlvl_id 
+                                 WHERE tbl_organization.userID = '$uid'";
+
                     $checkorgq = mysqli_query($conn, $checkorg);
                     while($roworg = mysqli_fetch_array($checkorgq)){
 
                         $sid = $roworg['scholarshipID'];
 
-                        $countsc = "SELECT COUNT(*) FROM `tbl_scholars` WHERE tbl_scholars.scholarshipID = '$sid' ";
+                        $countsc = "SELECT COUNT(*) FROM `tbl_scholars` WHERE `scholarshipID` = '$sid' AND `status` = 3;";
                         $countscq = mysqli_query($conn, $countsc);
                         $countscrow = mysqli_fetch_array($countscq);
 
@@ -460,11 +453,12 @@
 
                     <tr>
                         <th scope="row"><?php echo $count ?></th>
-                        <td><?php echo ucfirst($roworg['name'])?></td>
+                        <td><?php echo ucfirst($roworg['scholarshipname'])?></td>
                         <td><?php echo ucfirst($roworg['description'])?></td>
                         <!-- <td><?php echo ucfirst($roworg['req'])?></td> -->
-                        <td><?php echo ucfirst($roworg['applicant_limit'] - $countscrow['COUNT(*)'] ."/". ucfirst($roworg['applicant_limit']))?></td>
-                        <td><a href="?sid=<?php echo $sid?>" class="btn btn-primary btn-sm">View Applicants</a></td>
+                        <td><?php echo ucfirst($roworg['programlvl'])?></td>
+                        <td><?php echo ucfirst($countscrow['COUNT(*)'] ."/". ucfirst($roworg['applicant_limit']))?></td>
+                        <td><a href="?sid=<?php echo $sid?>" class="btn btn-primary btn-sm">View Scholars</a></td>
                     </tr>
                     
                     <?php
@@ -501,40 +495,32 @@
 
           <!-- Default Table -->
           <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Userid</th>
-                <th scope="col">Name</th>
-                <th scope="col">Gender</th>
-                <th scope="col">Email</th>
-                <th scope="col">Option</th>
-              </tr>
-            </thead>
-            <tbody>
-            
-              <?php
-
-                require '../conn.php';
-
-                $uid = $_SESSION['userID'];
-
-                $sids = @$_GET['sid'];
-
-                $checkorg = "SELECT *, tbl_scholars.scholarsID AS 'ssid' FROM `tbl_scholars` INNER JOIN tbl_scholarship ON tbl_scholars.scholarshipID = tbl_scholarship.scholarshipID INNER JOIN tbl_users ON tbl_scholars.userid = tbl_users.userID INNER JOIN tbl_userinformation ON tbl_userinformation.userinfoID = tbl_users.userinfoID WHERE tbl_scholars.scholarshipID = '$sids' AND tbl_scholars.status = '3'  ";
-                $checkorgq = mysqli_query($conn, $checkorg);
-                while($roworg = mysqli_fetch_array($checkorgq)){
-                  $userid = $roworg['userid'];
-              ?>
-
-              <tr>
-                  <th scope="row"><?php echo ucfirst($roworg['userid'])?></th>
-                  <td><?php echo ucfirst($roworg['fname']. " " .$roworg['lname'] )?></td>
-                  <td><?php echo ucfirst($roworg['gender'])?></td>
-                  <td><?php echo ucfirst($roworg['email'])?></td>
-                  <td><a href="#" id="myBtn<?php echo $userid?>" class="btn btn-primary">Show Requirements</a></td>
-                  <td>
-                      <!-- Your additional content here -->
-                  </td>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Email</th>
+            <th scope="col">Option</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        require '../conn.php';
+        $uid = $_SESSION['userID'];
+        $sids = @$_GET['sid'];
+        $checkorg = "SELECT *, tbl_scholars.scholarsID AS 'ssid' FROM `tbl_scholars` INNER JOIN tbl_scholarship ON tbl_scholars.scholarshipID = tbl_scholarship.scholarshipID INNER JOIN tbl_users ON tbl_scholars.userid = tbl_users.userID INNER JOIN tbl_userinformation ON tbl_userinformation.userinfoID = tbl_users.userinfoID WHERE tbl_scholars.scholarshipID = '$sids' AND tbl_scholars.status = '3'  ";
+        $checkorgq = mysqli_query($conn, $checkorg);
+        $count = 1; // Counter variable
+        while ($roworg = mysqli_fetch_array($checkorgq)) {
+            $userid = $roworg['userid'];
+            ?>
+            <tr>
+                <th scope="row"><?php echo $count; ?></th>
+                <td><?php echo ucfirst($roworg['fname'] . " " . $roworg['lname']) ?></td>
+                <td><?php echo ucfirst($roworg['gender']) ?></td>
+                <td><?php echo ($roworg['email']) ?></td>
+                <td><a href="#" id="myBtn<?php echo $userid ?>" class="btn btn-primary">Show Requirements</a></td>
               </tr>
 
 
@@ -542,50 +528,119 @@
 
                 <div id="myModal<?php echo $userid?>" class="modal">
                   <div class="modal-content">
-                    
-                    <span style="color: red; text-align: right;" class="close<?php echo $userid ?>">&times;</span>
+                        <span style="color: red; text-align: right;" class="close<?php echo $userid ?>">&times;</span>
+                        <div class="mb-2">
+                            <h1 class="text-xl font-semibold">Student Information</h1>
+                        </div>
+                        <div class="p-2">
+                            <div class="flex gap-2 mb-2">
+                                <div class="w-[50%]">
+                                    <label>Firstname</label>
+                                    <div>
+                                        <input class="p-2 bg-indigo-100 w-full" type="" value="<?php echo $roworg['fname']?>" disabled>
+                                    </div>
+                                </div>
+                                <div class="w-[50%]">
+                                    <label>Middlename</label>
+                                    <div>
+                                        <input class="p-2 bg-indigo-100 w-full" type="" value="<?php echo $roworg['mname']?>" disabled>
+                                    </div>
+                                </div>
+                                <div class="w-[50%]">
+                                    <label>Lastname</label>
+                                    <div>
+                                        <input class="p-2 bg-indigo-100 w-full" type="" value="<?php echo $roworg['lname']?>" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex gap-2 mb-2">
+                                <div class="w-[50%]">
+                                    <label>Gender</label>
+                                    <div>
+                                        <input class="p-2 bg-indigo-100 w-full" type="" value="<?php echo $roworg['gender']?>" disabled>
+                                    </div>
+                                </div>
+                                <div class="w-[50%]">
+                                    <label>Birthdate</label>
+                                    <div>
+                                        <input class="p-2 bg-indigo-100 w-full" type="" value="<?php echo $roworg['birthdate']?>" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex gap-2 mb-2">
+                                <div class="w-[30%]">
+                                    <label>Contact Number</label>
+                                    <div>
+                                        <input class="p-2 bg-indigo-100 w-full" type="" value="<?php echo $roworg['contact']?>" disabled>
+                                    </div>
+                                </div>
+                                <div class="w-[70%]">
+                                    <label>Email Address</label>
+                                    <div>
+                                        <input class="p-2 bg-indigo-100 w-full" type="" value="<?php echo $roworg['email']?>" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex gap-2 mb-2">
+                                <div class="w-full">
+                                    <label>Home Address</label>
+                                    <div>
+                                        <input class="p-2 bg-indigo-100 w-full" type="" value="<?php echo $roworg['address']?>" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <hr class="m-2">
+                        
+                        <div class="m-2">
+                            <div>Submitted Applications</div>
+                            <div>
+                                
+                                
+                                
+                                <?php
+                                
+                                    $res = $schorow['scholarshipID'];
+                                    
+                                    
+                                    $getfiles = "SELECT * FROM `tbl_uploads` WHERE userid = '$userid' AND sid = '$sid' ";
+                                    $res = mysqli_query($conn, $getfiles);
+                                    
+                                    $countup = 1;
+                                    
+                                    while($uploadsrow = mysqli_fetch_array($res)){                                    
+                                
+                                ?>
+                                
+                                    <div class="flex gap-3 m-2">
+                                        <div>
+                                            <?php echo $countup; ?>
+                                        </div>
+                                        <div>
+                                            <a href="../<?php echo $uploadsrow['dest']; ?>"><?php echo substr($uploadsrow['dest'], 8); ?></a>
+                                        </div>
+                                    </div>
+                                    
+                                <?php
+                                    $countup++;
+                                
+                                    }
+                                ?>
+                                
+                                <div>
+                                    <div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="align-right mt-2">
 
-                    
-                    <div class="container" >
-                    <p style="text-align: left; font-size: 13px; font-style: italic; color: gray">Userid: <?php echo $roworg['userid']?></p>
-                      <div class="user-image" style="border-radius: 20px">
-                          <img src="img/profile.png"
-                          alt="this image contains user-image">
+                           <a class="p-2 bg-red-500 m-2 text-white rounded-md text-sm" href="removeappq.php?scholarsid=<?php echo $roworg['ssid']?>&&ssid=<?php echo $sid?>">
+                              Remove Applicant
+                          </a>
                       </div>
-              
-                      <div class="content">
-                          <h3 class="name"><?php echo ucfirst($roworg['fname']. " " .$roworg['mname']. " " .$roworg['lname'] )?></h3>
-                          
-                          <p class="username">@<?php echo $roworg['username']?> | <?php echo $roworg['email']?></p>
-                      </div>
-                    
-                      <h5>Requirements:</h5>
-                      <ul class="list-group">
-                          <?php
-                          $status2 = "";
-
-                          $selectfiels = "SELECT * FROM tbl_applicant_req WHERE userid = '$userid' AND scolarshipID = '$sids' ";
-                          $selectfielsq = mysqli_query($conn, $selectfiels);
-                          $selectfielsrow = mysqli_fetch_array($selectfielsq);
-
-                          if (mysqli_num_rows($selectfielsq) > 0) {
-                              $files = json_decode($selectfielsrow['reqs']);
-
-                              for ($i = 0; $i < count($files); $i++) {
-                                  $status2 .= '<li class="list-group-item"><a href="../uploads/' . $files[$i] . '" target="_blank">' . $files[$i] . '</a></li>';
-                              }
-
-                              echo $status2;
-                          } else {
-                              echo '<li class="list-group-item">No requirements uploaded.</li>';
-                          }
-                          ?>
-                      </ul>
-
-                    </div>
-                    
-                  <!-- This is link of adding small images
-                      which are used in the link section  -->
                   </div>
 
                 </div>
@@ -608,11 +663,12 @@
                   .modal-content {
                     left: 10%;
                     top: -15%;
+                    overflow: auto;
                     background-color: #fefefe;
                     margin: 15% auto; /* 15% from the top and centered */
                     padding: 20px;
                     border: 1px solid #888;
-                    width: 30%; /* Could be more or less, depending on screen size */
+                    width: 60%; /* Could be more or less, depending on screen size */
                   }
 
                   /* The Close Button */
@@ -660,11 +716,13 @@
                 <!-- The modal end -->
 
               <?php
+              $count++; // Increment counter
                 }
               ?>
 
             </tbody>
           </table>
+
           <!-- End Default Table Example -->
           
         </div>

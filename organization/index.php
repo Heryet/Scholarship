@@ -2,7 +2,7 @@
 
 session_start();
 
-require 'conn.php';
+require '../conn.php';
 
 if(isset($_SESSION['userID'])){
 
@@ -52,7 +52,7 @@ $rowdata = mysqli_fetch_array($getdataq);
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Organization</title>
+  <title><?php echo ucfirst($rowdata['fname']) ?> Organization</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -88,7 +88,7 @@ $rowdata = mysqli_fetch_array($getdataq);
 <body>
 
   <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
+    <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.php" class="logo d-flex align-items-center">
@@ -185,11 +185,7 @@ $rowdata = mysqli_fetch_array($getdataq);
         </li><!-- End Notification Nav -->
 
         <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
+<!-- End Messages Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
             <li class="dropdown-header">
@@ -267,7 +263,7 @@ $rowdata = mysqli_fetch_array($getdataq);
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="organization/users-profile.php">
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.php">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -286,12 +282,6 @@ $rowdata = mysqli_fetch_array($getdataq);
               <hr class="dropdown-divider">
             </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -318,30 +308,23 @@ $rowdata = mysqli_fetch_array($getdataq);
       include('../include/sidebar-org.php');
   
   ?>
+<main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Dashboard</h1>
+        </div>
 
-  <main id="main" class="main">
-
-    <div class="pagetitle">
-      <h1>Dashboard</h1>
-    </div><!-- End Page Title -->
-    
-
-    <div id="piechart" style="width: 1080px; height: 720px;"></div>
-  </main><!-- End #main -->
+        <div id="piechart" style="width: 100%; height: 400px;"></div>
+    </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
-    <div class="copyright">
-      <!-- &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved -->
-    </div>
-    <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
-    </div>
-  </footer><!-- End Footer -->
+        <div class="copyright">
+            &copy; 2023 Web-Based Scholarship Portal. All Rights Reserved
+        </div>
+        <div class="credits">
+            Designed by <a href="https://yourwebsite.com">Web-Based Scholarship Portal</a>
+        </div>
+    </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

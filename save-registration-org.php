@@ -13,6 +13,7 @@
     $address = $_POST['address'];
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $orgname = $_POST['orgname'];
     $userid = "02100".rand(0,9).rand(0,9).rand(0,9).rand(0,9);
     $userid2 = "02000".rand(0,9).rand(0,9).rand(0,9).rand(0,9);
 
@@ -34,7 +35,7 @@
         if(mysqli_num_rows($checkaccountusernameq) > 0){
             echo "<script>alert('Username already exist'); history.go(-1); </script>";
         }else{
-            $insertdata = "INSERT INTO `tbl_userinformation` (`userinfoID`, `fname`, `mname`, `lname`, `birthdate`, `gender`, `email`,`contact`,`address`, `username`, `password`, `status`) VALUES ('$userid', '$fname', '$mname', '$lname', '$bd', '$gender', '$email','$contact','$address', '$username', '$password', '1')";
+            $insertdata = "INSERT INTO `tbl_userinformation` (`userinfoID`, `fname`, `mname`, `lname`, `birthdate`, `gender`, `email`,`contact`,`address`, `username`, `password`, `status`, `profpic`, `orgname`) VALUES ('$userid', '$fname', '$mname', '$lname', '$bd', '$gender', '$email','$contact','$address', '$username', '$password', '1', '1', '$orgname')";
             $insertdata2 = "INSERT INTO `tbl_users` (`userID`, `userinfoID`, `userlvlID`, `status`) VALUES ('$userid2', '$userid', '2', '1')";
 
             if(mysqli_query($conn, $insertdata)){

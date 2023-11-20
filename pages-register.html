@@ -39,6 +39,25 @@
 </head>
 
 <body>
+    <!-- Modal for Terms and Conditions -->
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Add your terms and conditions content here -->
+        <p>Your terms and conditions content goes here...</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
   <main>
     <div class="container">
@@ -65,6 +84,7 @@
                   </div>
 
                   <form class="row g-3 needs-validation" novalidate>
+                      <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">I agree and accept the terms and conditions</a>
                     
                     <div class="col-12">
                       <label for="yourName" class="form-label">Your Name</label>
@@ -96,10 +116,14 @@
                     <div class="col-12">
                       <div class="form-check">
                         <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
-                        <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>
+                        <label class="form-check-label" for="acceptTerms">
+                          I agree and accept the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and conditions</a>
+                        </label>
                         <div class="invalid-feedback">You must agree before submitting.</div>
                       </div>
                     </div>
+                    
+                    
                     <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit">Create Account</button>
                     </div>

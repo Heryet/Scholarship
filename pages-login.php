@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Pages / Login - NiceAdmin Bootstrap Template</title>
+  <title>Pages / Login - DS Scholarship Portal</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -66,36 +66,67 @@
                     <p class="text-center small">Enter your username & password to login</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" method="POST" action="loginq.php" novalidate>
-
-                    <div class="col-12">
-                      <label for="yourUsername" class="form-label">Username</label>
-                      <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Please enter your username.</div>
+                    <form class="row g-3 needs-validation" method="POST" action="loginq.php" novalidate>
+                      <div class="col-12">
+                        <label for="yourUsername" class="form-label">Username</label>
+                        <div class="input-group has-validation">
+                          <span class="input-group-text" id="inputGroupPrepend">@</span>
+                          <input type="text" name="username" class="form-control" id="yourUsername" required>
+                          <div class="invalid-feedback">Please enter your username.</div>
+                        </div>
                       </div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
-                      <div class="invalid-feedback">Please enter your password!</div>
-                    </div>
-
-                    <div class="col-12">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
-                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                      <div class="col-12">
+                        <label for="yourPassword" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" id="yourPassword" required>
+                        <div class="invalid-feedback">Please enter your password!</div>
                       </div>
-                    </div>
-                    <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Login</button>
-                    </div>
-                    <div class="col-12">
-                      <p class="small mb-0">Don't have account? <a href="pages-register.php">Create an account</a></p>
-                    </div>
-                  </form>
+                      <div class="col-12">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
+                          <label class="form-check-label" for="rememberMe">Remember me</label>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <button class="btn btn-primary w-100" type="submit">Login</button>
+                      </div>
+                      <div class="col-12">
+                        <p class="small mb-0">Don't have an account? <a href="pages-register.php">Create an account</a></p>
+                      </div>
+                    </form>
+                    <script>
+                      const usernameInput = document.getElementById('yourUsername');
+                      const passwordInput = document.getElementById('yourPassword');
+                      const rememberMeCheckbox = document.getElementById('rememberMe');
+                    
+                      // Check if there are stored credentials in local storage
+                      if (localStorage.getItem('rememberMe') === 'true') {
+                        const storedUsername = localStorage.getItem('username');
+                        const storedPassword = localStorage.getItem('password');
+                        
+                        if (storedUsername) {
+                          usernameInput.value = storedUsername;
+                        }
+                        if (storedPassword) {
+                          passwordInput.value = storedPassword;
+                        }
+                        rememberMeCheckbox.checked = true;
+                      }
+                    
+                      rememberMeCheckbox.addEventListener('change', function () {
+                        if (rememberMeCheckbox.checked) {
+                          localStorage.setItem('rememberMe', 'true');
+                          localStorage.setItem('username', usernameInput.value);
+                          localStorage.setItem('password', passwordInput.value);
+                        } else {
+                          localStorage.removeItem('rememberMe');
+                          localStorage.removeItem('username');
+                          localStorage.removeItem('password');
+                        }
+                      });
+                    </script>
+
+
+
 
                 </div>
               </div>

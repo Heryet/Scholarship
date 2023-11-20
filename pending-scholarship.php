@@ -73,12 +73,7 @@
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
-    <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div><!-- End Search Bar -->
+<!-- End Search Bar -->
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
@@ -166,10 +161,10 @@
 
         <li class="nav-item dropdown">
 
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
+          <!--<a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">-->
+          <!--  <i class="bi bi-chat-left-text"></i>-->
+          <!--  <span class="badge bg-success badge-number">3</span>-->
+          <!--</a><!-- End Messages Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
             <li class="dropdown-header">
@@ -239,15 +234,15 @@
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
+              <h6><?php echo ucfirst($rowdata['fname']." ".$rowdata['lname']) ?></h6>
+              <span>Student</span>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.php">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -307,25 +302,25 @@
     
     <div class="containeradd">
     <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">List of Applied Scholarships</h5>
+        <div class="card-body">
+            <h5 class="card-title">List of Applied Scholarships</h5>
 
-              <!-- Default Table -->
-              <table class="table">
+            <!-- Default Table -->
+            <table class="table">
                 <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Scholarship</th>
-                    <!-- <th scope="col">Description</th>
-                    <th scope="col">Requirements</th> -->
-                    <!-- <th scope="col">Remaining</th> -->
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
-                  </tr>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Scholarship</th>
+                        <th scope="col">Organization</th>
+                        <th scope="col">Scholarship Type</th>
+                        <th scope="col">Program Level</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                    </tr>
                 </thead>
                 <tbody>
-                
-                  <?php
+
+                    <?php
 
                     require 'conn.php';
 
@@ -333,61 +328,64 @@
 
                     $checkorg = "SELECT * FROM `tbl_scholarship` INNER JOIN tbl_scholars ON tbl_scholarship.scholarshipID = tbl_scholars.scholarshipID WHERE tbl_scholars.userid = '$uid'  ";
                     $checkorgq = mysqli_query($conn, $checkorg);
+
                     $count = 1;
 
-                    while($roworg = mysqli_fetch_array($checkorgq)){
+                    while ($roworg = mysqli_fetch_array($checkorgq)) {
+
                         $schID = $roworg['scholarshipID'];
+
+                        $getdatascho = "SELECT * FROM tbl_scholarship LEFT JOIN tbl_stype ON tbl_scholarship.stype_id = tbl_stype.stype_id LEFT JOIN tbl_organization ON tbl_organization.orgID = tbl_scholarship.orgID JOIN tbl_programlvl ON tbl_scholarship.proglvlid = tbl_programlvl.programlvl_id WHERE tbl_scholarship.scholarshipID = '$schID' ";
+
+                        $getdataschoq = mysqli_query($conn, $getdatascho);
+                        $countscrow2 = mysqli_fetch_array($getdataschoq);
+
+                        $organizationName = $countscrow2['name'];
 
                         $status = '';
                         $status2 = '';
+                        $status3 = '';
 
-                        if($roworg['status'] == '0'){
-                            $status = '<b style="color: blue">Pending</b>';
-                            $status2 = '';
-                        }else if($roworg['status'] == '1'){
-                            $status = '<b style="color: green">Checking</b>';
-                            $status2 = '';
-                        }else if($roworg['status'] == '2'){
-                          $status = '<b style="color: Pink">Accepted</b>';
-                          $status2 = '<a href="view-scholarship.php?schid='.$schID.'">Send Requirements</a>';
-                        }else if($roworg['status'] == '3'){
-                          $status = '<b style="color: skyblue">Requirements uploaded</b>';
-
-                          $selectfiels = "SELECT * FROM tbl_applicant_req WHERE userid = '$uid' AND scolarshipID = '$schID' ";
-                          $selectfielsq = mysqli_query($conn, $selectfiels);
-                          $selectfielsrow = mysqli_fetch_array($selectfielsq);
-
-                            $files = json_decode($selectfielsrow['reqs']);
-
-                            for($i=0; $i<count($files); $i++){
-                              $status2 = $status2."<a href='uploads/".$files[$i]."' target='_blank'>".$files[$i]."</a><br>";
-                            }
-                          
+                        if ($roworg['status'] == '0') {
+                            $status = '<b style="color: red">Declined</b>';
+                            $status2 = '<a href="view-scholarship.php?schid=' . $schID . '" class="btn btn-primary">View</a>';
+                        } else if ($roworg['status'] == '1') {
+                            $status = '<b style="color: orange">Checking</b>';
+                            $status2 = '<a href="view-scholarship.php?schid=' . $schID . '" class="btn btn-primary">View</a>
+                                        <a href="view-scholarship.php?schid=' . $schID . '" class="btn btn-warning">Edit</a>
+                                        <a href="cancel-scholarship.php?schid=' . $schID . '" class="btn btn-danger">Cancel</a>';
+                        } else if ($roworg['status'] == '3') {
+                            $status = '<b style="color: green">Accepted</b>';
+                            $status2 = '<a href="view-scholarship.php?schid=' . $schID . '" class="btn btn-primary">View</a>';
                         }
-                  ?>
 
-                  <tr>
-                    <th scope="row"><?php echo $count; ?></th>
-                    <td><?php echo ucfirst($roworg['scholarshipname'])?></td>
-                    <td><?php echo $status; ?></td>
-                    <td>
-                        <?php echo $status2; ?>
-                    </td>
-                  </tr>
-                    
-                  <?php
+                    ?>
+
+                        <tr>
+                            <th scope="row"><?php echo $count; ?></th>
+                            <td><?php echo ucfirst($roworg['scholarshipname']) ?></td>
+                            <td><?php echo ucfirst($organizationName) ?></td>
+                            <td><?php echo ucfirst($countscrow2['stype']) ?></td>
+                            <td><?php echo ucfirst($countscrow2['programlvl']) ?></td>
+                            <td><?php echo $status; ?></td>
+                            <td>
+                                <?php echo $status2; ?>
+                            </td>
+                        </tr>
+
+                    <?php
 
                         $count++;
-
                     }
-                  ?>
+                    ?>
 
                 </tbody>
-              </table>
-              <!-- End Default Table Example -->
-            </div>
-          </div>
+            </table>
+            <!-- End Default Table Example -->
+        </div>
     </div>
+</div>
+
 
   </main><!-- End #main -->
 

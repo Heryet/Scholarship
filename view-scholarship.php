@@ -336,14 +336,29 @@
                 </h6>
             </i>
         </div>
-        <br><br>
-        <b>Requirements:</b><br><br>
+        <br>
+        <b>Qualifications:</b><br>
+        <div style="padding: 10px; background-color: #ddd; border-radius: 10px">
+            <pre><?php 
+                echo $roworg['qualification'];
+            ?></pre>
+        </div>
+        <br>
+        <b>Benefits:</b><br>
+        <div style="padding: 10px; background-color: #ddd; border-radius: 10px">
+            <pre><?php 
+                echo $roworg['benefit'];
+            ?></pre>
+        </div>
+        <br>
+        <b>Requirements:</b><br>
         <div style="padding: 10px; background-color: #ddd; border-radius: 10px">
             <pre><?php 
                 echo $roworg['req'];
             ?></pre>
         </div>
         <br>
+        
 
         <?php
 
@@ -357,7 +372,8 @@
           if($status == ''){
             $statusmsg = '<a href="res-scholar.php?userid='.$uid.'&&schid='.$schid.'" style="padding: 10px; background-color: #ddd; border-radius: 10px">Reserve Me</a>';
           }else if($status == '1'){
-            $statusmsg = '<a style="padding: 10px; background-color: #ddd; border-radius: 10px" readonly>Reserved</a>';
+            $statusmsg = '<a href="pending-scholarship.php?schid=' . $schID . '" class="btn btn-primary">Get back</a>
+                                    <a href="cancel-scholarship.php?schid=' . $schID . '" class="btn btn-danger">Cancel Application</a>';
           }else if($status == '2'){
             $statusmsg = '
 
