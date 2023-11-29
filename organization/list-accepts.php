@@ -600,10 +600,6 @@
                                 
                                 
                                 <?php
-                                
-                                    $res = $schorow['scholarshipID'];
-                                    
-                                    
                                     $getfiles = "SELECT * FROM `tbl_uploads` WHERE userid = '$userid' AND sid = '$sid' ";
                                     $res = mysqli_query($conn, $getfiles);
                                     

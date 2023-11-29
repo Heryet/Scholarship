@@ -391,16 +391,7 @@
                             
                                     location.href = '?stype='+selectedValue;
                                 }
-                            </script>
-
-                                <?php
-                                    
-                                    $stypee = $_POST['stypee'];
-                                    
-                                    
-                                
-                                ?>
-                                
+                            </script>             
                                 <div class="input-group-prepend1">
                                     <label class="input-group-text1" for="filterDropdown"></label>
                                 </div>
@@ -612,18 +603,12 @@
                                 
                                 
                                 
-                                <?php
-                                
-                                    $res = $schorow['scholarshipID'];
-                                    
-
-                                    
-                                    
+                                <?php                 
                                     $getfiles = "SELECT * FROM `tbl_uploads` WHERE userid = '$userid' AND sid = '$sid' ";
                                     $res = mysqli_query($conn, $getfiles);
                                     
                                     
-                                    
+                                                            
                                     $countup = 1;
                                     
                                     while($uploadsrow = mysqli_fetch_array($res)){                                    
@@ -635,7 +620,8 @@
                                             <?php echo $countup; ?>
                                         </div>
                                         <div>
-                                            <a href="../<?php echo $uploadsrow['dest']; ?>"><?php echo substr($uploadsrow['dest'], 8); ?></a>
+                                            <a href="../<?php echo $uploadsrow['dest']; ?>"><?php echo substr($uploadsrow['dest'], 2); ?></a>
+                                           <script> console.log(<?php echo $sid; ?>)></script>
                                         </div>
                                     </div>
                                     
@@ -644,6 +630,7 @@
                                 
                                     }
                                 ?>
+                               
                                 
                                 <div>
                                     <div>

@@ -35,6 +35,8 @@
                     header('location: pages-register-org.php');
                 }else if($getcredrow['status'] == 2){
                     header('location: pages-org-denied.php');
+                }else if($getcredrow['status'] == 0){
+                    header('location: verify-org.php');
                 }else if($getcredrow['status'] == 3){
                     $_SESSION['userID'] = $getcredrow['userID'];
                     $_SESSION['userlvlID'] = $getcredrow['userlvlID'];

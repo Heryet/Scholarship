@@ -309,11 +309,19 @@
         $uid = $_SESSION['userID'];
         $schid = $_GET['schid'];
 
-        $checkorg = "SELECT * FROM `tbl_scholarship` WHERE scholarshipID = '$schid' ";
+        $checkorg = "SELECT *
+        FROM tbl_scholarship
+        LEFT JOIN tbl_stype ON tbl_scholarship.stype_id = tbl_stype.stype_id
+        LEFT JOIN tbl_organization ON tbl_organization.orgID = tbl_scholarship.orgID
+        JOIN tbl_programlvl ON tbl_scholarship.proglvlid = tbl_programlvl.programlvl_id
+        LEFT JOIN tbl_uploads ON tbl_scholarship.scholarshipID = tbl_uploads.sid COLLATE utf8mb4_general_ci
+        WHERE scholarshipID = '$schid' ";
         $checkorgq = mysqli_query($conn, $checkorg);
         $count = 1;
 
         $roworg = mysqli_fetch_array($checkorgq);
+        $userid = $roworg['userid'];
+        $sid = $roworg['scholarshipID'];
     ?>
 
 
@@ -358,6 +366,52 @@
             ?></pre>
         </div>
         <br>
+        <div class="m-2">
+                            <div>Submitted Applications</div>
+                            <div>
+                                
+                                
+                                
+                                <?php
+                                    
+                                
+                                    // $res = $schorow['scholarshipID'];
+                                    
+
+                                    
+                                    
+                                    $getfiles = "SELECT * FROM `tbl_uploads` WHERE userid = '$userid' AND sid = '$sid' ";
+                                    $res = mysqli_query($conn, $getfiles);
+                                    
+                                    
+                                    
+                                    $countup = 1;
+                                    
+                                    while($uploadsrow = mysqli_fetch_array($res)){                                    
+                                
+                                ?>
+                                
+                                    <div class="flex gap-3 m-2">
+                                        <div>
+                                            <?php echo $countup; ?>
+                                            <a href="../<?php echo $uploadsrow['dest']; ?>"><?php echo substr($uploadsrow['dest'], 8); ?></a>
+                                            <script> console.log(<?php echo $sid; ?>)></script>
+                                        </div>
+                                    </div>
+                                    
+                                <?php
+                                    $countup++;
+                                
+                                    }
+                                ?>
+                                
+                                <div>
+                                    <div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
         
 
         <?php
@@ -369,11 +423,13 @@
           $status = @$checklistrow['status'];
           $statusmsg = "";
 
+          $schID = "";
+
           if($status == ''){
             $statusmsg = '<a href="res-scholar.php?userid='.$uid.'&&schid='.$schid.'" style="padding: 10px; background-color: #ddd; border-radius: 10px">Reserve Me</a>';
           }else if($status == '1'){
             $statusmsg = '<a href="pending-scholarship.php?schid=' . $schID . '" class="btn btn-primary">Get back</a>
-                                    <a href="cancel-scholarship.php?schid=' . $schID . '" class="btn btn-danger">Cancel Application</a>';
+                          <a href="cancel-scholarship.php?schid=' . $schID . '" class="btn btn-danger">Cancel Application</a>';
           }else if($status == '2'){
             $statusmsg = '
 

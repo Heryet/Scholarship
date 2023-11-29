@@ -389,8 +389,6 @@ $rowdata = mysqli_fetch_array($getdataq);
             <option value="text">Textbox</option>
             <option value="file">File</option>
             <option value="number">Number</option>
-            <option value="radio">Radio</option>
-            <option value="checkbox">Checkbox</option>
         </select>
     </div>
     <div class="col-md-2">
@@ -408,214 +406,355 @@ $rowdata = mysqli_fetch_array($getdataq);
     
         var fldArr = [];
         document.addEventListener('DOMContentLoaded', function() {
-            var scholarshipTypeSelect = document.querySelector('select[name="stype"]');
-            scholarshipTypeSelect.addEventListener('change', function(e) {
-                var selectedType = e.target.value;
-                var applicationFields = document.getElementById('fldlist');
-    
-                // Clear existing fields
-                applicationFields.innerHTML = '';
+        var applicationFields = document.getElementById('fldlist');
+
+        var scholarshipTypeSelect = document.querySelector('select[name="stype"]');
+        scholarshipTypeSelect.addEventListener('change', function(e) {
+            var selectedType = e.target.value;
+
+            // Clear existing fields
+            applicationFields.innerHTML = '';
     
                 if (selectedType === '1') { // Merit-Based
-                    var gwaField = document.createElement('div');
-                    gwaField.innerHTML = `
-                        <label for="gwaField" class="form-label">GWA</label>
-                        <input type="number" class="form-control" id="gwaField" name="gwaField" required>
-                        <label for="uploadGWAFile" class="form-label">Upload GWA File</label>
-                        <input type="file" class="form-control" id="uploadGWAFile" name="uploadGWAFile" accept=".pdf, .doc, .docx" required>
-                    `;
-                    applicationFields.appendChild(gwaField);
-    
-                    var gradeRangeField = document.createElement('div');
-                    gradeRangeField.innerHTML = `
-                        <label class="form-label">Grade Range</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gradeRange" value="90above" id="90above">
-                            <label class="form-check-label" for="90above">
-                                90 - Above
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gradeRange" value="80above" id="80above">
-                            <label class="form-check-label" for="80above">
-                                80 - Above
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gradeRange" value="75above" id="75above">
-                            <label class="form-check-label" for="75above">
-                                75 - Above
-                            </label>
-                        </div>
-                    `;
-                    applicationFields.appendChild(gradeRangeField);
-    
-                    var honorListField = document.createElement('div');
-                    honorListField.innerHTML = `
-                        <label for="honorListField" class="form-label">Honor List</label>
-                        <input type="text" class="form-control" id="honorListField" name="honorListField" required>
-                        <label for="uploadFile" class="form-label">Upload File</label>
-                        <input type="file" class="form-control" id="uploadFile" name="uploadFile" accept=".pdf, .doc, .docx" required>
-                    `;
-                    applicationFields.appendChild(honorListField);
+                var meritSelection = document.createElement('div');
+                meritSelection.innerHTML = `
+                    <label for="meritField" class="form-label">Select Merit Type:</label>
+                    <select class="form-select" id="meritField" name="meritField" required>
+                        <option selected disabled>Select Merit Type</option>
+                        <option value="gwa">GWA</option>
+                        <option value="gradeRange">Grade Range</option>
+                        <option value="honorList">Honor List</option>
+                    </select>
+                `;
+                applicationFields.appendChild(meritSelection);
 
+                var gwaField = document.createElement('div');
+                gwaField.innerHTML = `
+                    <label for="gwaField" class="form-label">GWA</label>
+                    <input type="number" class="form-control" id="gwaField" name="gwaField" disabled>
+                    <label for="uploadGWAFile" class="form-label">Upload GWA File</label>
+                    <input type="file" class="form-control" id="uploadGWAFile" name="uploadGWAFile" accept=".pdf, .doc, .docx">
+                `;
+
+                var gradeRangeField = document.createElement('div');
+                gradeRangeField.innerHTML = `
+                    <label class="form-label">Set Grade Range</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gradeRange" value="90above" id="90above">
+                        <label class="form-check-label" for="90above">
+                            90 - Above
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gradeRange" value="80above" id="80above">
+                        <label class="form-check-label" for="80above">
+                            80 - Above
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gradeRange" value="75above" id="75above">
+                        <label class="form-check-label" for="75above">
+                            75 - Above
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="numericGrade">Numeric Grade</label>
+                        <input type="number" class="form-control" id="numericGrade" name="numericGrade" min="0" max="100" disabled>
+                    </div>
+                `;
+                applicationFields.appendChild(gradeRangeField);
+
+
+                var honorListField = document.createElement('div');
+                honorListField.innerHTML = `
+                    <label for="honorListField" class="form-label">Honor List</label>
+                    <input type="text" class="form-control" id="honorListField" name="honorListField" disabled>
+                    <label for="uploadFile" class="form-label">Upload File</label>
+                    <input type="file" class="form-control" id="uploadFile" name="uploadFile" accept=".pdf, .doc, .docx">
+                `;
+
+                var meritSelect = document.getElementById('meritField');
+                meritSelect.addEventListener('change', function(event) {
+                    var selectedMerit = event.target.value;
+
+                    // Remove existing fields
+                    applicationFields.innerHTML = '';
+                    applicationFields.appendChild(meritSelection);
+
+                    // Show selected field
+                    if (selectedMerit === 'gwa') {
+                        applicationFields.appendChild(gwaField);
+                    } else if (selectedMerit === 'gradeRange') {
+                        applicationFields.appendChild(gradeRangeField);
+                    } else if (selectedMerit === 'honorList') {
+                        applicationFields.appendChild(honorListField);
+                    }
+                });
+              
+
+                }else if (selectedType === '2') { // Skills-Based
+            var skillsDropdown = document.createElement('div');
+            skillsDropdown.innerHTML = `
+                <label for="skillsDropdown" class="form-label">Skills</label>
+                <select class="form-select" id="skillsDropdown" name="skillsDropdown" required>
+                    <option selected disabled>Select Skill</option>
+                    <option value="sports">Sports</option>
+                    <option value="music">Music</option>
+                    <option value="tech-voc">Tech-Voc</option>
+                </select>
+            `;
+            applicationFields.appendChild(skillsDropdown);
+
+            var sportsField = document.createElement('div');
+            sportsField.innerHTML = `
+                            <label for="sportsRadio" class="form-label">Sports</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sports" value="Basketball" id="basketball">
+                                <label class="form-check-label" for="basketball">Basketball</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sports" value="Volleyball" id="volleyball">
+                                <label class="form-check-label" for="volleyball">Volleyball</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sports" value="Swimming" id="swimming">
+                                <label class="form-check-label" for="swimming">Swimming</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sports" value="Boxing" id="boxing">
+                                <label class="form-check-label" for="boxing">Boxing</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sports" value="Tennis" id="tennis">
+                                <label class="form-check-label" for="tennis">Tennis</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sports" value="Football" id="football">
+                                <label class="form-check-label" for="football">Football</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sports" value="Billiards" id="billiards">
+                                <label class="form-check-label" for="billiards">Billiards</label>
+                            </div>
+                            <label for="otherSports" class="form-label">If not listed, please specify</label>
+                            <input type="text" class="form-control" id="otherSports" name="otherSports">
+                            <!-- Add more sports options -->
+                        `;
+                        applicationFields.appendChild(sportsField);
+                
+                        var musicField = document.createElement('div');
+            musicField.innerHTML = `
+                            <label for="musicInstrument" class="form-label">Music Instruments</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="music" value="Guitar" id="guitar">
+                                <label class="form-check-label" for="guitar">Guitar</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="music" value="Piano" id="piano">
+                                <label class="form-check-label" for="piano">Piano</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="music" value="Violin" id="violin">
+                                <label class="form-check-label" for="violin">Violin</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="music" value="Flute" id="flute">
+                                <label class="form-check-label" for="flute">Flute</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="music" value="Trumpet" id="trumpet">
+                                <label class="form-check-label" for="trumpet">Trumpet</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="music" value="Cello" id="cello">
+                                <label class="form-check-label" for="cello">Cello</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="music" value="Saxophone" id="saxophone">
+                                <label class="form-check-label" for="saxophone">Saxophone</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="music" value="Clarinet" id="clarinet">
+                                <label class="form-check-label" for="clarinet">Clarinet</label>
+                            </div>
+                            <label for="otherMusic" class="form-label">If not listed, please specify</label>
+                            <input type="text" class="form-control" id="otherMusic" name="otherMusic">
+                        `;
+                        applicationFields.appendChild(musicField);
+                  
+                        var techVocField = document.createElement('div');
+                        techVocField.innerHTML = `
+                        <label class="form-label">Tech-Voc Skills</label><br>
+                          <input type="radio" id="all" name="techVoc" value="all" required>
+                          <label for="all">All Skills</label><br>
+
+                          <input type="radio" id="welding" name="techVoc" value="Shielded Metal Arc Welding" required>
+                          <label for="welding">Shielded Metal Arc Welding</label><br>
+
+                          <input type="radio" id="cookery" name="techVoc" value="Cookery">
+                          <label for="cookery">Cookery</label><br>
+
+                          <input type="radio" id="foodService" name="techVoc" value="Food and Beverage Service">
+                          <label for="foodService">Food and Beverage Service</label><br>
+
+                          <input type="radio" id="pastry" name="techVoc" value="Bread and Pastry Production">
+                          <label for="pastry">Bread and Pastry Production</label><br>
+
+                          <input type="radio" id="housekeeping" name="techVoc" value="Housekeeping">
+                          <label for="housekeeping">Housekeeping</label><br>
+
+                          <input type="radio" id="electrical" name="techVoc" value="Electrical Installation and Maintenance">
+                          <label for="electrical">Electrical Installation and Maintenance</label><br>
+
+                          <input type="radio" id="computer" name="techVoc" value="Computer Systems Servicing">
+                          <label for="computer">Computer Systems Servicing</label><br>
+
+                          <input type="radio" id="bookkeeping" name="techVoc" value="Bookkeeping">
+                          <label for="bookkeeping">Bookkeeping</label><br>
+
+                          <input type="radio" id="contactCenter" name="techVoc" value="Contact Center Services">
+                          <label for="contactCenter">Contact Center Services</label><br>
+                          <label for="otherTechVoc" class="form-label">If not listed, please specify</label>
+                          <input type="text" class="form-control" id="otherTechVoc" name="otherTechVoc">
+                        `;
+                        applicationFields.appendChild(techVocField);
+
+                        var skillsSelect = document.getElementById('skillsDropdown');
+            skillsSelect.addEventListener('change', function(event) {
+                var selectedSkill = event.target.value;
+
+                // Clear existing fields except skills dropdown
+                while (applicationFields.children.length > 1) {
+                    if (applicationFields.lastChild.id !== 'skillsDropdown') {
+                        applicationFields.removeChild(applicationFields.lastChild);
+                    } else {
+                        break;
+                    }
                 }
-            });
-        });
+                          applicationFields.appendChild(skillsDropdown);
 
-    addfld.addEventListener('click', function(e){
-        var fld = {
-            name: fldname.value,
-            type: fldtype.value,
-            options: []
-        };
-        fldArr.push(fld);
-        updateFieldList();
+                          if (selectedSkill === 'sports') {
+                              applicationFields.appendChild(sportsField);
+                          } else if (selectedSkill === 'music') {
+                              applicationFields.appendChild(musicField);
+                          } else if (selectedSkill === 'tech-voc') {
+                              applicationFields.appendChild(techVocField);
+                          }
+                          
+                        
+                      })
+                    }
+                    else if (selectedType === '4') { // Needs-Based
+    var needsSelection = document.createElement('div');
+    needsSelection.innerHTML = `
+        <label class="form-label">Needs Selection</label><br>
+        <input type="radio" id="yearlyIncome" name="needsSelection" value="Yearly Income" required>
+        <label for="yearlyIncome">Yearly Income</label><br>
+        <input type="radio" id="monthlyIncome" name="needsSelection" value="Monthly Income">
+        <label for="monthlyIncome">Monthly Income</label><br>
+        <input type="radio" id="weeklyIncome" name="needsSelection" value="Weekly Income">
+        <label for="weeklyIncome">Weekly Income</label><br>
+    `;
+    applicationFields.appendChild(needsSelection);
+
+    var needsField = document.createElement('div');
+    needsField.innerHTML = `
+        <label for="incomeField" class="form-label">Income</label>
+        <input type="number" class="form-control" id="incomeField" name="incomeField" disabled>
+        <label for="uploadIncomeFile" class="form-label">Upload Income File</label>
+        <input type="file" class="form-control" id="uploadIncomeFile" name="uploadIncomeFile" accept=".pdf, .doc, .docx" disabled>
+    `;
+
+    var needsRadioButtons = document.querySelectorAll('input[name="needsSelection"]');
+    needsRadioButtons.forEach(function(radio) {
+        radio.addEventListener('change', function(event) {
+            var selectedNeed = event.target.value;
+
+            // Clear existing fields
+            while (applicationFields.lastChild !== needsSelection) {
+                applicationFields.removeChild(applicationFields.lastChild);
+            }
+
+            applicationFields.appendChild(needsSelection);
+
+            // Show selected field
+            if (selectedNeed === 'Yearly Income' || selectedNeed === 'Monthly Income' || selectedNeed === 'Weekly Income') {
+                applicationFields.appendChild(needsField);
+            }
+        });
     });
+}
 
-    function updateFieldList() {
-        fldlist.innerHTML = '';
-        for(var i=0; i<fldArr.length; i++){
-            if (fldArr[i].type === 'checkbox') {
-                fldlist.innerHTML += `<div style="padding: 3px; background-color: white; box-shadow: 0px 0px 1px 1px #ddd; border-radius: 5px; margin-top: 5px">
-                    <div style="padding: 3px;">${fldArr[i].name}</div>
-                    <div id="options${i}" style="padding: 3px;">
-                        <button style="background-color: green; color: white; border: solid 1px green; border-radius: 5px" onclick="addOption(${i})">Add Option</button>
-                        <button style="background-color: red; color: white; border: solid 1px red; border-radius: 5px" onclick="removeLastOption(${i})">Remove Last Option</button>
-                        <button style="background-color: blue; color: white; border: solid 1px blue; border-radius: 5px" onclick="addSelection(${i})">Add Selection</button>
-                        <button style="background-color: orange; color: white; border: solid 1px orange; border-radius: 5px" onclick="removeLastSelection(${i})">Remove Last Selection</button>
-                    </div>
-                </div>`;
-            } else if (fldArr[i].type === 'radio') {
-                fldlist.innerHTML += `<div style="padding: 3px; background-color: white; box-shadow: 0px 0px 1px 1px #ddd; border-radius: 5px; margin-top: 5px">
-                    <div style="padding: 3px;">${fldArr[i].name}</div>
-                    <div id="options${i}" style="padding: 3px;">
-                        <button style="background-color: green; color: white; border: solid 1px green; border-radius: 5px" onclick="addOption(${i})">Add Option</button>
-                        <button style="background-color: red; color: white; border: solid 1px red; border-radius: 5px" onclick="removeField(${i})">Remove</button>
-                    </div>
-                </div>`;
-            } else {
-                fldlist.innerHTML += `<div style="padding: 3px; background-color: white; box-shadow: 0px 0px 1px 1px #ddd; border-radius: 5px; margin-top: 5px">
-                    <div style="padding: 3px;">${fldArr[i].name}</div>
-                    <div style="padding: 3px;">
-                        <input style="border: solid 1px #ddd; border-radius: 5px" type="${fldArr[i].type}">
-                        <button style="background-color: red; color: white; border: solid 1px red; border-radius: 5px" onclick="removeField(${i})">Remove</button>
-                    </div>
-                </div>`;
-            }
-        }
-        let string = JSON.stringify(fldArr);
-        localStorage.setItem("fldArr", string);
-        console.log(string);
-        document.cookie = 'fldArr='+ JSON.stringify(string);
-    }
-
-    fldtype.addEventListener('change', function(e){
-        var selectedType = e.target.value;
-        var optionExists = false;
-        for (var i = 0; i < fldtype.options.length; i++) {
-            if (fldtype.options[i].value === selectedType) {
-                optionExists = true;
-                break;
-            }
-        }
-        if (!optionExists) {
-            fldtype.innerHTML += `<option value="${selectedType}">${selectedType.charAt(0).toUpperCase() + selectedType.slice(1)}</option>`;
-        }
-    });
-
-    function removeField(index){
-        fldArr.splice(index, 1);
-        updateFieldList();
-    }
-
-    function addOption(index) {
-        var optionsDiv = document.getElementById(`options${index}`);
-        var optionInput = document.createElement('input');
-        optionInput.setAttribute('type', 'text');
-        optionInput.setAttribute('placeholder', 'Option');
-        var addBtn = document.createElement('button');
-        addBtn.innerText = 'Add';
-        addBtn.style.backgroundColor = 'blue';
-        addBtn.style.color = 'white';
-        addBtn.style.border = 'solid 1px blue';
-        addBtn.style.borderRadius = '5px';
-        addBtn.addEventListener('click', function(){
-            if (optionInput.value.trim() !== '') {
-                fldArr[index].options.push(optionInput.value);
-                optionInput.value = '';
-                showOptionsPreview(index);
-            } else {
-                alert('Please enter an option!');
-            }
+                    
         });
-
-        var removeOptionBtn = document.createElement('button');
-        removeOptionBtn.innerText = 'Remove Last';
-        removeOptionBtn.style.backgroundColor = 'orange';
-        removeOptionBtn.style.color = 'white';
-        removeOptionBtn.style.border = 'solid 1px orange';
-        removeOptionBtn.style.borderRadius = '5px';
-        removeOptionBtn.addEventListener('click', function(){
-            if (fldArr[index].options.length > 0) {
-                fldArr[index].options.pop();
-                showOptionsPreview(index);
-            } else {
-                alert('No options to remove!');
-            }
-        });
-
-        optionsDiv.appendChild(optionInput);
-        optionsDiv.appendChild(addBtn);
-        optionsDiv.appendChild(removeOptionBtn);
     }
+);
 
-    function addSelection(index) {
-        var selectionInput = prompt('Enter a selection:');
-        if (selectionInput !== null && selectionInput.trim() !== '') {
-            fldArr[index].options.push(selectionInput);
-            showOptionsPreview(index);
-        }
-    }
+                addfld.addEventListener('click', function (e) {
+    var fld = {
+        name: fldname.value,
+        type: fldtype.value
+    };
+    fldArr.push(fld);
 
-    function removeLastSelection(index) {
-        if (fldArr[index].options.length > 0) {
-            fldArr[index].options.pop();
-            showOptionsPreview(index);
-        } else {
-            alert('No selections to remove!');
-        }
-    }
+    var newFieldDiv = document.createElement('div');
+    newFieldDiv.style.padding = '3px';
+    newFieldDiv.style.backgroundColor = 'white';
+    newFieldDiv.style.boxShadow = '0px 0px 1px 1px #ddd';
+    newFieldDiv.style.borderRadius = '5px';
+    newFieldDiv.style.marginTop = '5px';
 
-    function showOptionsPreview(index) {
-        var optionsDiv = document.getElementById(`options${index}`);
-        optionsDiv.innerHTML = '';
-        fldArr[index].options.forEach(option => {
-            var optionPreview = document.createElement('div');
-            optionPreview.innerText = option;
-            optionsDiv.appendChild(optionPreview);
-        });
-        var addBtn = document.createElement('button');
-        addBtn.innerText = 'Add Option';
-        addBtn.style.backgroundColor = 'green';
-        addBtn.style.color = 'white';
-        addBtn.style.border = 'solid 1px green';
-        addBtn.style.borderRadius = '5px';
-        addBtn.addEventListener('click', function(){
-            addOption(index);
-        });
-        var removeBtn = document.createElement('button');
-        removeBtn.innerText = 'Remove';
-        removeBtn.style.backgroundColor = 'red';
-        removeBtn.style.color = 'white';
-        removeBtn.style.border = 'solid 1px red';
-        removeBtn.style.borderRadius = '5px';
-        removeBtn.addEventListener('click', function(){
-            removeField(index);
-        });
-        optionsDiv.appendChild(addBtn);
-        optionsDiv.appendChild(removeBtn);
-    }
+    var fieldNameDiv = document.createElement('div');
+    fieldNameDiv.style.padding = '3px';
+    fieldNameDiv.textContent = fld.name;
+
+    var inputField = document.createElement('input');
+    inputField.style.border = 'solid 1px #ddd';
+    inputField.style.borderRadius = '5px';
+    inputField.setAttribute('type', fld.type);
+
+    var removeButton = document.createElement('button');
+    removeButton.textContent = 'x';
+    removeButton.style.backgroundColor = 'red';
+    removeButton.style.color = 'white';
+    removeButton.style.border = 'solid 1px red';
+    removeButton.style.borderRadius = '5px';
+    removeButton.onclick = function () {
+        removeData(fldArr.indexOf(fld));
+    };
+
+    var fieldContainer = document.createElement('div');
+    fieldContainer.style.padding = '3px';
+
+    fieldContainer.appendChild(inputField);
+    fieldContainer.appendChild(removeButton);
+
+    newFieldDiv.appendChild(fieldNameDiv);
+    newFieldDiv.appendChild(fieldContainer);
+
+    fldlist.appendChild(newFieldDiv);
+
+    let string = JSON.stringify(fldArr);
+    localStorage.setItem('fldArr', string);
+    console.log(string);
+
+    document.cookie = 'fldArr=' + JSON.stringify(string);
+});
+
+function removeData(index) {
+    fldArr.splice(index, 1);
+    fldlist.innerHTML = '';
+
+    for (var i = 0; i < fldArr.length; i++) {
+        var newFieldDiv = document.createElement('div');
+                        fldlist.innerHTML += '<div style="padding: 3px; background-color: white; box-shadow: 0px 0px 1px 1px #ddd; border-radius: 5px; margin-top: 5px"><div style="padding: 3px;">'+fldArr[i].name+'</div><div style="padding: 3px;"><input style="border: solid 1px #ddd; border-radius: 5px" type="'+fldArr[i].type+'"> <button style="background-color: red; color: white; border: solid 1px red; border-radius: 5px" onclick="removedata('+i+')">x</button> </div></div>';
+                    }
+                    let string = JSON.stringify(fldArr) 
+                    localStorage.setItem("fldArr", string)
+                    console.log(string);
+                    
+                    document.cookie = 'fldArr='+ JSON.stringify(string);
+                }
 
 </script>
             

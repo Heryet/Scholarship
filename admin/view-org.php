@@ -227,7 +227,6 @@ $rowdata = mysqli_fetch_array($getdataq);
             require '../conn.php';
             
             $userid = $_GET['userid'];
-            $sid = $_GET['scholarshipID'];
             
             $query = "SELECT *, tbl_users.userid as 'uid' 
                       FROM `tbl_users` 
@@ -253,6 +252,8 @@ $rowdata = mysqli_fetch_array($getdataq);
                 echo "Error fetching organization details: " . mysqli_error($conn);
             }
             ?>
+
+            
             <div class="details-table">
             <div class="details-row">
                 <div class="details-label">ID:</div>

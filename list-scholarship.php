@@ -420,42 +420,41 @@
                 <tbody>
     <?php
     require 'conn.php';
-    
-    
-    
-    $stypelink = $_GET['stype'];
-    $programLvlLink = $_GET['programlvl'];
 
+    // Initialize variables
+    $stypelink = isset($_GET['stype']) ? $_GET['stype'] : "";
+    $programLvlLink = isset($_GET['programlvl']) ? $_GET['programlvl'] : "";
     $programLvlLinkMsg = "";
+    $stypeMsg = "";
     
+    // Initialize session messages
+    $_SESSION['programMsg'] = "";
+    $_SESSION['stypeMsg'] = "";
     
-    @$_SESSION['programMsg'] = "";
-    @$_SESSION['stypeMsg'] = "";
-    
-    if($stypelink == ""){
+    // Prepare stype message
+    if ($stypelink == "") {
         $_SESSION['stypeMsg'] = "";
-    }else{
-        $_SESSION['stypeMsg'] = "WHERE tbl_scholarship.stype_id=".$stypelink;
-    }
-    
-    @$stypelinkmsg = $_SESSION['stypeMsg'];
-    
-    if ($programLvlLink == "") {
-    $programLvlLinkMsg = "";
     } else {
-        $programLvlLinkMsg = "AND tbl_scholarship.proglvlid=".$programLvlLink;
+        $_SESSION['stypeMsg'] = "WHERE tbl_scholarship.stype_id = " . mysqli_real_escape_string($conn, $stypelink);
+    }
+    $stypeMsg = isset($_SESSION['stypeMsg']) ? $_SESSION['stypeMsg'] : "";
+    
+    // Prepare program level message
+    if ($programLvlLink == "") {
+        $programLvlLinkMsg = "";
+    } else {
+        $programLvlLinkMsg = "AND tbl_scholarship.proglvlid = " . mysqli_real_escape_string($conn, $programLvlLink);
     }
     
-    
-    
+    // Fetch scholarship data based on criteria
     $uid = $_SESSION['userID'];
-    $checkorg = "SELECT * FROM `tbl_scholarship` $stypelinkmsg $programLvlLinkMsg";
+    $checkorg = "SELECT * FROM `tbl_scholarship` $stypeMsg $programLvlLinkMsg";
     $checkorgq = mysqli_query($conn, $checkorg);
+    
     $count = 1;
     $count2 = 0;
     
-    
-
+    // Loop through fetched data
     while ($roworg = mysqli_fetch_array($checkorgq)) {
     $schID = $roworg['scholarshipID'];
 

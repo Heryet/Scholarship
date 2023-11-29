@@ -6,7 +6,6 @@
     $lname = $_POST['lname'];
     $mname = $_POST['mname'];
     $bd = $_POST['bd'];
-    $userlvl = $_POST['userlvl'];
     $gender = $_POST['gender'];
     $email = $_POST['email'];
     $contact = $_POST['contact'];
@@ -72,7 +71,6 @@
     }else{
         echo "error";
     }
-
 
     $checkaccountemail = "SELECT * FROM tbl_userinformation WHERE tbl_userinformation.email = '$email' ";
     $checkaccountemailq = mysqli_query($conn, $checkaccountemail);

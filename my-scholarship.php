@@ -280,14 +280,6 @@
                                     location.href = '?stype='+selectedValue;
                                 }
                             </script>
-
-                                <?php
-                                    
-                                    $stypee = $_POST['stypee'];
-                                    
-                                    
-                                
-                                ?>
                                 
                                 <div class="input-group-prepend1">
                                     <label class="input-group-text1" for="filterDropdown"></label>
@@ -311,13 +303,13 @@
     <?php
     require 'conn.php';
 
-    $stypelink = $_GET['stype'];
+    $stypelink = isset($_GET['stype']) ? $_GET['stype'] : "";
     $stypelinkmsg = "";
-    
+
     if ($stypelink == "") {
         $stypelinkmsg = "";
     } else {
-        $stypelinkmsg = "WHERE tbl_scholarship.stype_id=" . $stypelink;
+        $stypelinkmsg = " AND tbl_scholarship.stype_id = $stypelink";
     }
     
     $uid = $_SESSION['userID'];
